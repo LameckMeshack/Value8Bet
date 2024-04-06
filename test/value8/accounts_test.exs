@@ -557,4 +557,56 @@ defmodule Value8.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_admin(admin)
     end
   end
+
+  describe "superadmins" do
+    alias Value8.Accounts.Superadmin
+
+    import Value8.AccountsFixtures
+
+    @invalid_attrs %{}
+
+    test "list_superadmins/0 returns all superadmins" do
+      superadmin = superadmin_fixture()
+      assert Accounts.list_superadmins() == [superadmin]
+    end
+
+    test "get_superadmin!/1 returns the superadmin with given id" do
+      superadmin = superadmin_fixture()
+      assert Accounts.get_superadmin!(superadmin.id) == superadmin
+    end
+
+    test "create_superadmin/1 with valid data creates a superadmin" do
+      valid_attrs = %{}
+
+      assert {:ok, %Superadmin{} = superadmin} = Accounts.create_superadmin(valid_attrs)
+    end
+
+    test "create_superadmin/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Accounts.create_superadmin(@invalid_attrs)
+    end
+
+    test "update_superadmin/2 with valid data updates the superadmin" do
+      superadmin = superadmin_fixture()
+      update_attrs = %{}
+
+      assert {:ok, %Superadmin{} = superadmin} = Accounts.update_superadmin(superadmin, update_attrs)
+    end
+
+    test "update_superadmin/2 with invalid data returns error changeset" do
+      superadmin = superadmin_fixture()
+      assert {:error, %Ecto.Changeset{}} = Accounts.update_superadmin(superadmin, @invalid_attrs)
+      assert superadmin == Accounts.get_superadmin!(superadmin.id)
+    end
+
+    test "delete_superadmin/1 deletes the superadmin" do
+      superadmin = superadmin_fixture()
+      assert {:ok, %Superadmin{}} = Accounts.delete_superadmin(superadmin)
+      assert_raise Ecto.NoResultsError, fn -> Accounts.get_superadmin!(superadmin.id) end
+    end
+
+    test "change_superadmin/1 returns a superadmin changeset" do
+      superadmin = superadmin_fixture()
+      assert %Ecto.Changeset{} = Accounts.change_superadmin(superadmin)
+    end
+  end
 end

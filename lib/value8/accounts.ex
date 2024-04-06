@@ -458,4 +458,100 @@ defmodule Value8.Accounts do
   def change_admin(%Admin{} = admin, attrs \\ %{}) do
     Admin.changeset(admin, attrs)
   end
+
+  alias Value8.Accounts.Superadmin
+
+  @doc """
+  Returns the list of superadmins.
+
+  ## Examples
+
+      iex> list_superadmins()
+      [%Superadmin{}, ...]
+
+  """
+  def list_superadmins do
+    Repo.all(Superadmin)
+  end
+
+  @doc """
+  Gets a single superadmin.
+
+  Raises `Ecto.NoResultsError` if the Superadmin does not exist.
+
+  ## Examples
+
+      iex> get_superadmin!(123)
+      %Superadmin{}
+
+      iex> get_superadmin!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_superadmin!(id), do: Repo.get!(Superadmin, id)
+
+  @doc """
+  Creates a superadmin.
+
+  ## Examples
+
+      iex> create_superadmin(%{field: value})
+      {:ok, %Superadmin{}}
+
+      iex> create_superadmin(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_superadmin(attrs \\ %{}) do
+    %Superadmin{}
+    |> Superadmin.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a superadmin.
+
+  ## Examples
+
+      iex> update_superadmin(superadmin, %{field: new_value})
+      {:ok, %Superadmin{}}
+
+      iex> update_superadmin(superadmin, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_superadmin(%Superadmin{} = superadmin, attrs) do
+    superadmin
+    |> Superadmin.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a superadmin.
+
+  ## Examples
+
+      iex> delete_superadmin(superadmin)
+      {:ok, %Superadmin{}}
+
+      iex> delete_superadmin(superadmin)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_superadmin(%Superadmin{} = superadmin) do
+    Repo.delete(superadmin)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking superadmin changes.
+
+  ## Examples
+
+      iex> change_superadmin(superadmin)
+      %Ecto.Changeset{data: %Superadmin{}}
+
+  """
+  def change_superadmin(%Superadmin{} = superadmin, attrs \\ %{}) do
+    Superadmin.changeset(superadmin, attrs)
+  end
 end
