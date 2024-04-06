@@ -267,6 +267,18 @@ defmodule Value8.Accounts do
     end
   end
 
+
+
+ @doc """
+ Soft deletes the user with the given id.
+ """
+  def delete_user(id) do
+    user = get_user!(id)
+    user
+    |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now()})
+    |> Repo.update()
+  end
+
   @doc """
   Confirms a user by the given token.
 
