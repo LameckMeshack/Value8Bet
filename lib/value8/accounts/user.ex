@@ -9,6 +9,9 @@ defmodule Value8.Accounts.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
 
+    has_one :admin, Value8.Accounts.Admin
+
+
     timestamps(type: :utc_datetime)
   end
 

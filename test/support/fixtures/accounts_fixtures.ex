@@ -28,4 +28,18 @@ defmodule Value8.AccountsFixtures do
     [_, token | _] = String.split(captured_email.text_body, "[TOKEN]")
     token
   end
+
+  @doc """
+  Generate a admin.
+  """
+  def admin_fixture(attrs \\ %{}) do
+    {:ok, admin} =
+      attrs
+      |> Enum.into(%{
+
+      })
+      |> Value8.Accounts.create_admin()
+
+    admin
+  end
 end
