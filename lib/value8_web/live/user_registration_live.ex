@@ -32,6 +32,7 @@ defmodule Value8Web.UserRegistrationLive do
         </.error>
 
         <.input field={@form[:email]} type="email" label="Email" required />
+        <.input field={@form[:username]} type="text" label="Username" required />
         <.input field={@form[:password]} type="password" label="Password" required />
 
         <:actions>
