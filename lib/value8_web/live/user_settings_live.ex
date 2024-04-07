@@ -19,6 +19,7 @@ defmodule Value8Web.UserSettingsLive do
           phx-change="validate_email"
         >
           <.input field={@email_form[:email]} type="email" label="Email" required />
+          <.input field={@email_form[:username]} type="text" label="Username" required />
           <.input
             field={@email_form[:current_password]}
             name="current_password"
