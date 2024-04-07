@@ -11,7 +11,6 @@ defmodule Value8.Accounts.User do
     field :deleted_at, :utc_datetime
 
     has_one :admin, Value8.Accounts.Admin
-    has_one :superadmin, Value8.Accounts.Superadmin
 
 
     timestamps(type: :utc_datetime)

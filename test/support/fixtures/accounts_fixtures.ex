@@ -43,17 +43,5 @@ defmodule Value8.AccountsFixtures do
     admin
   end
 
-  @doc """
-  Generate a superadmin.
-  """
-  def superadmin_fixture(attrs \\ %{}) do
-    {:ok, superadmin} =
-      attrs
-      |> Enum.into(%{
 
-      })
-      |> Value8.Accounts.create_superadmin()
-
-    superadmin
-  end
 end
