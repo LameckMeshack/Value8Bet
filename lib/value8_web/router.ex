@@ -3,6 +3,7 @@ defmodule Value8Web.Router do
 
   import Value8Web.UserAuth
 
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -68,8 +69,19 @@ defmodule Value8Web.Router do
       on_mount: [{Value8Web.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+      live "/admin/home", AdminHomeLive, :index
     end
   end
+
+  # Admin route
+  # scope "/admin", Value8Web do
+  #   pipe_through [:browser, :require_authenticated_user]
+
+  #   live_session :require_authenticated_user,
+  #     on_mount: [{Value8Web.UserAuth, :ensure_authenticated}] do
+  #     live "/users", UserSettingsLive, :edit
+  #   end
+  # end
 
   scope "/", Value8Web do
     pipe_through [:browser]
