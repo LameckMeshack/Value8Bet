@@ -5,6 +5,7 @@ defmodule Value8.Accounts.Admin do
   schema "admins" do
 
     belongs_to :user, Value8.Accounts.User
+    has_many :permissions, Value8.Accounts.Permission
 
     timestamps(type: :utc_datetime)
   end
