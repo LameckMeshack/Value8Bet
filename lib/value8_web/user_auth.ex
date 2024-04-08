@@ -4,6 +4,7 @@ defmodule Value8Web.UserAuth do
   import Plug.Conn
   import Phoenix.Controller
 
+  alias Value8.Repo
   alias Value8.Accounts
 
   # Make the remember me cookie valid for 60 days.
@@ -89,10 +90,14 @@ defmodule Value8Web.UserAuth do
   and remember me token.
   """
   def fetch_current_user(conn, _opts) do
-    {user_token, conn} = ensure_user_token(conn)
-    user = user_token && Accounts.get_user_by_session_token(user_token)
-    assign(conn, :current_user, user)
-  end
+  {user_token, conn} = ensure_user_token(conn)
+  user = user_token && Accounts.get_user_by_session_token(user_token)
+  user = user
+         |> Repo.preload([:admin, admin: :permissions])
+        #  |> Repo.preload(:another_association) # Preload any other associations if needed
+  assign(conn, :current_user, user)
+end
+
 
   defp ensure_user_token(conn) do
     if token = get_session(conn, :user_token) do

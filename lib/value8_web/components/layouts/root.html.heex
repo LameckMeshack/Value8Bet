@@ -72,6 +72,11 @@
       <%= if @current_user do %>
         <li class="text-[0.8125rem]  leading-6 text-zinc-900">
           <%= @current_user.username %>
+          <%= if @current_user.admin do %>
+  admin
+<% else %>
+  user
+<% end %>
         </li>
         <li>
           <.link
