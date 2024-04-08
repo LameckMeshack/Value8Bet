@@ -69,19 +69,26 @@ defmodule Value8Web.Router do
       on_mount: [{Value8Web.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
-      live "/admin/home", AdminHomeLive, :index
+      # live "/admin/home", AdminHomeLive, :index
     end
   end
 
   # Admin route
-  # scope "/admin", Value8Web do
-  #   pipe_through [:browser, :require_authenticated_user]
-
-  #   live_session :require_authenticated_user,
-  #     on_mount: [{Value8Web.UserAuth, :ensure_authenticated}] do
-  #     live "/users", UserSettingsLive, :edit
-  #   end
-  # end
+  scope "/admin", Value8Web do
+    pipe_through [:browser, :require_authenticated_admin]
+    live_session :require_authenticated_admin,
+      on_mount: [{Value8Web.UserAuth, :ensure_authenticated}] do
+      live "/home", AdminHomeLive, :index
+    end
+  end
+  # Admin route
+  scope "/superadmin", Value8Web do
+    pipe_through [:browser, :require_authenticated_superadmin]
+    live_session :require_authenticated_superadmin,
+      on_mount: [{Value8Web.UserAuth, :ensure_authenticated}] do
+      live "/home", AdminHomeLive, :index
+    end
+  end
 
   scope "/", Value8Web do
     pipe_through [:browser]

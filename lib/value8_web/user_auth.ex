@@ -216,6 +216,30 @@ end
     end
   end
 
+ def require_authenticated_admin(conn, _opts) do
+    case conn.assigns.current_user do
+      %{admin: admin} when not is_nil(admin) ->
+        conn
+      _ ->
+        conn
+        |> put_flash(:error, "You must be an admin to access this page.")
+        |> redirect(to: "/")
+        |> halt()
+    end
+  end
+
+  def require_authenticated_superadmin(conn, _opts) do
+    case conn.assigns.current_user do
+      %{admin: %{permission: "superadmin"}} ->
+        conn
+      _ ->
+        conn
+        |> put_flash(:error, "You must be a superadmin to access this page.")
+        |> redirect(to: "/")
+        |> halt()
+    end
+  end
+
   defp put_token_in_session(conn, token) do
     conn
     |> put_session(:user_token, token)
