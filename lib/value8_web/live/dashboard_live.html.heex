@@ -1,0 +1,10 @@
+<div>
+  <div class="sidebar">
+    <button phx-click="select_section" phx-value-section="home">Home</button>
+    <button phx-click="select_section" phx-value-section="settings">Settings</button>
+    <button phx-click="select_section" phx-value-section="reports">Reports</button>
+  </div>
+  <div class="main-content">
+  <p>Selected section: <%= @selected_section %></p>
+  </div>
+</div>
