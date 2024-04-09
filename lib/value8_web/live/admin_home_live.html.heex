@@ -222,18 +222,14 @@
   <div class="p-4 bg-gray-400 h-[80vh] rounded-xl w-10/10 xl:ml-80">
    
     <p>Selected section: <%= @selected_section %></p>
-    <%= if @selected_section == "home" do %>
-    <.live_component module={Value8Web.HeroComponent} id="hero"/> 
+    <%= if @selected_section == "users" do %>
+    <div>
+ <%= for user <- @users do %>
+    <.live_component module={Value8Web.UserComponent} id={user.id} user={user} />
+ <% end %>
+</div>
      <% end %>
 
-       <%= if @selected_section == "dashboard" do %>
-    <.live_component module={Value8Web.HeroComponent2} id="hero2"/> 
-     <% end %>
-
-
-
-
-
-     
+    
   </div>
 </div>
