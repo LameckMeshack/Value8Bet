@@ -22,4 +22,29 @@ defmodule Value8.GamesFixtures do
 
     category
   end
+
+  @doc """
+  Generate a unique team abrrv.
+  """
+  def unique_team_abrrv, do: "some abrrv#{System.unique_integer([:positive])}"
+
+  @doc """
+  Generate a unique team name.
+  """
+  def unique_team_name, do: "some name#{System.unique_integer([:positive])}"
+
+  @doc """
+  Generate a team.
+  """
+  def team_fixture(attrs \\ %{}) do
+    {:ok, team} =
+      attrs
+      |> Enum.into(%{
+        abrrv: unique_team_abrrv(),
+        name: unique_team_name()
+      })
+      |> Value8.Games.create_team()
+
+    team
+  end
 end
