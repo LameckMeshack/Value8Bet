@@ -95,12 +95,12 @@ defmodule Value8Web.UserAuth do
   user = user
 |> Repo.preload([:admin, admin: :permissions])
 
-is_superadmin = user.admin.permissions
-|> Enum.any?(fn p -> p.name == "superadmin" end)
+# is_superadmin = user.admin.permissions
+# |> Enum.any?(fn p -> p.name == "superadmin" end)
 
-user_with_is_superadmin = Map.put(user, :is_superadmin, is_superadmin)
+# user_with_is_superadmin = Map.put(user, :is_superadmin, is_superadmin)
 
-assign(conn, :current_user, user_with_is_superadmin)
+assign(conn, :current_user, user)
 end
 
   defp ensure_user_token(conn) do
