@@ -47,4 +47,19 @@ defmodule Value8.GamesFixtures do
 
     team
   end
+
+  @doc """
+  Generate a fixture.
+  """
+  def fixture_fixture(attrs \\ %{}) do
+    {:ok, fixture} =
+      attrs
+      |> Enum.into(%{
+        match_date: ~U[2024-04-08 20:55:00Z],
+        match_time: ~T[14:00:00]
+      })
+      |> Value8.Games.create_fixture()
+
+    fixture
+  end
 end

@@ -5,6 +5,7 @@ defmodule Value8.Games.Category do
   schema "categories" do
     field :name, :string
     has_many :teams, Value8.Games.Team
+    has_many :fixtures, Value8.Games.Fixture
 
     timestamps(type: :utc_datetime)
   end

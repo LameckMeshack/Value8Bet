@@ -112,4 +112,60 @@ defmodule Value8.GamesTest do
       assert %Ecto.Changeset{} = Games.change_team(team)
     end
   end
+
+  describe "fixtures" do
+    alias Value8.Games.Fixture
+
+    import Value8.GamesFixtures
+
+    @invalid_attrs %{match_date: nil, match_time: nil}
+
+    test "list_fixtures/0 returns all fixtures" do
+      fixture = fixture_fixture()
+      assert Games.list_fixtures() == [fixture]
+    end
+
+    test "get_fixture!/1 returns the fixture with given id" do
+      fixture = fixture_fixture()
+      assert Games.get_fixture!(fixture.id) == fixture
+    end
+
+    test "create_fixture/1 with valid data creates a fixture" do
+      valid_attrs = %{match_date: ~U[2024-04-08 20:55:00Z], match_time: ~T[14:00:00]}
+
+      assert {:ok, %Fixture{} = fixture} = Games.create_fixture(valid_attrs)
+      assert fixture.match_date == ~U[2024-04-08 20:55:00Z]
+      assert fixture.match_time == ~T[14:00:00]
+    end
+
+    test "create_fixture/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Games.create_fixture(@invalid_attrs)
+    end
+
+    test "update_fixture/2 with valid data updates the fixture" do
+      fixture = fixture_fixture()
+      update_attrs = %{match_date: ~U[2024-04-09 20:55:00Z], match_time: ~T[15:01:01]}
+
+      assert {:ok, %Fixture{} = fixture} = Games.update_fixture(fixture, update_attrs)
+      assert fixture.match_date == ~U[2024-04-09 20:55:00Z]
+      assert fixture.match_time == ~T[15:01:01]
+    end
+
+    test "update_fixture/2 with invalid data returns error changeset" do
+      fixture = fixture_fixture()
+      assert {:error, %Ecto.Changeset{}} = Games.update_fixture(fixture, @invalid_attrs)
+      assert fixture == Games.get_fixture!(fixture.id)
+    end
+
+    test "delete_fixture/1 deletes the fixture" do
+      fixture = fixture_fixture()
+      assert {:ok, %Fixture{}} = Games.delete_fixture(fixture)
+      assert_raise Ecto.NoResultsError, fn -> Games.get_fixture!(fixture.id) end
+    end
+
+    test "change_fixture/1 returns a fixture changeset" do
+      fixture = fixture_fixture()
+      assert %Ecto.Changeset{} = Games.change_fixture(fixture)
+    end
+  end
 end

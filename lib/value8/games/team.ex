@@ -6,6 +6,8 @@ defmodule Value8.Games.Team do
     field :name, :string
     field :abrrv, :string
     belongs_to :category, Value8.Games.Category
+    has_many :home_fixtures, Value8.Games.Fixture, foreign_key: :team1_id
+    has_many :away_fixtures, Value8.Games.Fixture, foreign_key: :team2_id
 
     timestamps(type: :utc_datetime)
   end
