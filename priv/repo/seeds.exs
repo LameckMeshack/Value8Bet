@@ -11,6 +11,10 @@
 # and so on) as they will fail if something goes wrong.
 # categories seeder
 #
+alias Value8.Repo
+alias Value8.Games.Fixture
+alias Value8.Games.Team
+alias Value8.Games.Result
 
 
 # teams seeder
@@ -30,9 +34,7 @@
 
 #Fixtures seeder
 # Create a function to generate a random datetime within a range
-# alias Value8.Repo
-# alias Value8.Games.Fixture
-# alias Value8.Games.Team
+
 
 # # Generate fixtures for the next 6 days
 # for day <- 1..6 do
@@ -49,3 +51,30 @@
 #     team2_id: team2.id
 #   })
 # end
+
+
+# Results seeder
+# Fetch all fixtures
+# fixtures = Repo.all(Fixture)
+
+# # Generate results for each fixture
+# Enum.each(fixtures, fn fixture ->
+#   # Generate random scores
+#   team1_score = Enum.random(0..5)
+#   team2_score = Enum.random(0..5)
+
+#   # Determine the result
+#   result = cond do
+#     team1_score > team2_score -> :team1
+#     team1_score < team2_score -> :team2
+#     true -> :draw
+#   end
+
+#   # Insert a result
+#   Repo.insert!(%Result{
+#     fixture_id: fixture.id,
+#     team1_score: team1_score,
+#     team2_score: team2_score,
+#     result: result
+#   })
+# end)

@@ -8,6 +8,7 @@ defmodule Value8.Games.Fixture do
     belongs_to :category, Value8.Games.Category
     belongs_to :team1, Value8.Games.Team
     belongs_to :team2, Value8.Games.Team
+    has_one :result, Value8.Games.Result
 
     timestamps(type: :utc_datetime)
   end

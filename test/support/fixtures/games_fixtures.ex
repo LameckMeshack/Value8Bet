@@ -62,4 +62,20 @@ defmodule Value8.GamesFixtures do
 
     fixture
   end
+
+  @doc """
+  Generate a result.
+  """
+  def result_fixture(attrs \\ %{}) do
+    {:ok, result} =
+      attrs
+      |> Enum.into(%{
+        result: :team1,
+        team1_score: 42,
+        team2_score: 42
+      })
+      |> Value8.Games.create_result()
+
+    result
+  end
 end
