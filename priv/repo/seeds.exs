@@ -13,8 +13,9 @@
 #
 alias Value8.Repo
 alias Value8.Games.Fixture
-alias Value8.Games.Team
-alias Value8.Games.Result
+# alias Value8.Games.Team
+# alias Value8.Games.Result
+alias Value8.Bets.Odds
 
 
 # teams seeder
@@ -78,3 +79,24 @@ alias Value8.Games.Result
 #     result: result
 #   })
 # end)
+
+# Odds seeder
+# Fetch all fixtures
+fixtures = Repo.all(Fixture)
+
+# Generate odds for each fixture
+Enum.each(fixtures, fn fixture ->
+  # Generate random odds
+ # Generate random odds
+team1_odds = :rand.uniform() * 5 |> Float.round(2)
+team2_odds = :rand.uniform() * 5 |> Float.round(2)
+draw_odds = :rand.uniform() * 5 |> Float.round(2)
+
+  # Insert odds
+  Repo.insert!(%Odds{
+    fixture_id: fixture.id,
+    team1_odds: team1_odds,
+    team2_odds: team2_odds,
+    draw_odds: draw_odds
+  })
+end)
