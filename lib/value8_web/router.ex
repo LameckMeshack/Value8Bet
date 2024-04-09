@@ -79,7 +79,7 @@ defmodule Value8Web.Router do
     live_session :require_authenticated_admin,
       on_mount: [{Value8Web.UserAuth, :ensure_authenticated}] do
       live "/home", AdminHomeLive, :index
-     live "/dashboard", DashboardLive
+    #  live "/dashboard", DashboardLive
 
     end
   end
