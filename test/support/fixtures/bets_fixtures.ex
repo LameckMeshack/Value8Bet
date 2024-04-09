@@ -19,4 +19,22 @@ defmodule Value8.BetsFixtures do
 
     odds
   end
+
+  @doc """
+  Generate a bet.
+  """
+  def bet_fixture(attrs \\ %{}) do
+    {:ok, bet} =
+      attrs
+      |> Enum.into(%{
+        amount: "120.5",
+        potential_payout: "120.5",
+        result: :team1,
+        selected_result: :team1,
+        status: :pending
+      })
+      |> Value8.Bets.create_bet()
+
+    bet
+  end
 end
