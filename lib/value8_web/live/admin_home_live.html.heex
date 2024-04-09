@@ -39,7 +39,8 @@
           <button
             phx-click="select_section"
             phx-value-section="dashboard"
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize"
+            
+            class={[ "middle none font-sans font-bold center   text-xs py-3 rounded-lg   text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize", @selected_section == "dashboard" && "bg-blue-600"]}
             type="button"
           >
             <svg
@@ -66,8 +67,8 @@
         <li>
           <button
             phx-click="select_section"
-            phx-value-section="home"
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+            phx-value-section="users"
+           class={[ "middle none font-sans font-bold center   text-xs py-3 rounded-lg   text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize", @selected_section == "users" && "bg-blue-600"]}
             type="button"
           >
             <svg
@@ -86,7 +87,7 @@
             <p
               class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize"
             >
-              profile
+              Users
             </p>
           </button>
         </li>
@@ -94,7 +95,7 @@
           <button
             phx-click="select_section"
             phx-value-section="seee"
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+           class={[ "middle none font-sans font-bold center   text-xs py-3 rounded-lg   text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize", @selected_section == "seee" && "bg-blue-600"]}
             type="button"
           >
             <svg
@@ -121,7 +122,7 @@
           <button
             phx-click="select_section"
             phx-value-section="notifactions"
-            class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+            class={[ "middle none font-sans font-bold center   text-xs py-3 rounded-lg   text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize", @selected_section == "notifactions" && "bg-blue-600"]}
             type="button"
           >
             <svg
@@ -140,7 +141,7 @@
             <p
               class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize"
             >
-              notifactions
+              Notifications
             </p>
           </button>
         </li>
@@ -150,13 +151,15 @@
           <p
             class="block antialiased font-sans text-sm leading-normal text-white font-black uppercase opacity-75"
           >
-            auth pages
+            Super Admin Privileges
           </p>
         </li>
         <li>
-          <a class="" href="#">
+         
             <button
-              class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+             phx-click="select_section"
+            phx-value-section="config"
+             class={[ "middle none font-sans font-bold center   text-xs py-3 rounded-lg   text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize", @selected_section == "config" && "bg-blue-600"]}
               type="button"
             >
               <svg
@@ -175,15 +178,17 @@
               <p
                 class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize"
               >
-                sign in
+                Configure Games
               </p>
             </button>
-          </a>
+         
         </li>
         <li>
-          <a class="" href="#">
+          
             <button
-              class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+             phx-click="select_section"
+            phx-value-section="user_management"
+              class={[ "middle none font-sans font-bold center   text-xs py-3 rounded-lg   text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize", @selected_section == "user_management" && "bg-blue-600"]}
               type="button"
             >
               <svg
@@ -200,10 +205,10 @@
               <p
                 class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize"
               >
-                sign up
+               User Management
               </p>
             </button>
-          </a>
+         
         </li>
       </ul>
     </div>

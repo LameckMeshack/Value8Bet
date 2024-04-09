@@ -35,7 +35,7 @@ defmodule Value8Web.AdminHomeLive do
 # end
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, content: :settings, selected_section: "home")}
+    {:ok, assign(socket, content: :settings, selected_section: "dashboard")}
   end
 
   def handle_event("sidebar_clicked", %{"section" => section}, socket) do
