@@ -9,4 +9,8 @@ defmodule Value8Web.PageController do
 
     render(conn, :home, layout: false, categories: categories, fixtures: fixtures)
   end
+
+  # defp formatted_date(date) do
+  #   date |> Date.to_string(%{:format => "%A, %B %d, %Y"})
+  # end
 end
