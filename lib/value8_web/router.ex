@@ -21,7 +21,8 @@ defmodule Value8Web.Router do
   scope "/", Value8Web do
     pipe_through :browser
 
-    get "/", PageController, :home
+    # get "/", PageController, :home
+    live "/", HomeLive, :index
   end
 
   # Other scopes may use custom stacks.

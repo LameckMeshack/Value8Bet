@@ -6,11 +6,8 @@ defmodule Value8Web.PageController do
     categories = Value8.Games.list_categories()
     fixtures = Value8.Games.list_fixtures()
 
-
+    # add socket
     render(conn, :home, layout: false, categories: categories, fixtures: fixtures)
   end
 
-  # defp formatted_date(date) do
-  #   date |> Date.to_string(%{:format => "%A, %B %d, %Y"})
-  # end
 end

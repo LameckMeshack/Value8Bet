@@ -1,6 +1,7 @@
-<.flash_group flash={@flash} />
+
 
 <div class="px-4 py-4 w-12/12 flex">
+  
   <!-- component -->
   <div class="w-3/12">
     <h3>Sports Categories</h3>
@@ -68,12 +69,13 @@
       >
         <!-- Item 1 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src={~p"/images/images.jpeg"} class="block absolute top-1/2
-          left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
+          <img src={~s("/images/download.jpeg")} class="block absolute top-1/2
+          left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..."> left-1/2
+          w-full -translate-x-1/2 -translate-y-1/2" alt="...">
         </div>
         <!-- Item 2 -->
         <div class="hidden duration-700 ease-in-out" data-carousel-item>
-          <img src={~p"/images/download.jpeg"} class="block absolute top-1/2
+          <img src={~s"/images/download.jpeg"} class="block absolute top-1/2
           left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
         </div>
       </div>
@@ -158,89 +160,40 @@
 
     <p class="mt-5 text-center">Football Betting Odds</p>
 
-    <%= for fixture <- @fixtures do %>
-    <div class="border rounded-lg mb-4 px-4 py-4">
-      <div class="flex items-center mb-4">
-        <div class="mr-4">
-          <p class="text-gray-700">
-            <%= fixture.team1.name %> (<%= fixture.team1.abrrv %>)
-          </p>
-        </div>
-        <span class="text-gray-500">vs</span>
-        <div class="ml-4">
-          <p class="text-gray-700">
-            <%= fixture.team2.name %> (<%= fixture.team2.abrrv %>)
-          </p>
-        </div>
-      </div>
-      <div class="flex justify-between mb-4">
-        <p class="text-gray-700">
-          <%= fixture.match_date %> - <%= fixture.match_time %>
-        </p>
-        <p class="text-gray-700">Odds</p>
-      </div>
-      <ul class="list-none pl-4">
-        <li class="mb-2">
-          <span class="text-gray-700"> <%= fixture.team1.name %> (TOT): </span>
-          <span class="font-bold ml-2"><%= fixture.odds.team1_odds %></span>
-        </li>
-        <li class="mb-2">
-          <span class="text-gray-700"> <%= fixture.team2.name %> (ARS): </span>
-          <span class="font-bold ml-2"><%= fixture.odds.team2_odds %></span>
-        </li>
-        <li>
-          <span class="text-gray-700">Draw:</span>
-          <span class="font-bold ml-2"><%= fixture.odds.draw_odds %></span>
-        </li>
-      </ul>
-    </div>
-    <% end %>
+    <%= for fixture <- @fixtures do %> <.live_component @socket
+    module={Value8Web.FixtureLive} id={fixture.id} fixture={fixture} /> <% end
+    %>
   </div>
   <div class="w-3/12 p-4">
     <h3>Results</h3>
     <%= for fixture <- @fixtures do %>
- <div class="border rounded-lg mb-4 px-4 py-4 bg-white shadow-md">
-    <div class="flex items-center mb-4">
-      <div class="mr-4">
-        <p class="text-gray-700 font-semibold">
-          <%= fixture.team1.name %> (<%= fixture.team1.abrrv %>)
-        </p>
-      </div>
-      <span class="text-gray-500 font-semibold">vs</span>
-      <div class="ml-4">
-        <p class="text-gray-700 font-semibold">
-          <%= fixture.team2.name %> (<%= fixture.team2.abrrv %>)
-        </p>
-      </div>
-    </div>
-    <div class="flex justify-between mb-4">
-      <p class="text-gray-700 font-semibold">
-        <%= fixture.match_date %> - <%= fixture.match_time %>
-      </p>
-      <p class="text-gray-700 font-semibold">Odds</p>
-    </div>
-    <ul class="list-none pl-4">
-      <li class="mb-2">
-        <span class="text-gray-700"> <%= fixture.team1.name %> (TOT): </span>
-        <span class="font-bold ml-2"><%= fixture.odds.team1_odds %></span>
-      </li>
-      <li class="mb-2">
-        <span class="text-gray-700"> <%= fixture.team2.name %> (ARS): </span>
-        <span class="font-bold ml-2"><%= fixture.odds.team2_odds %></span>
-      </li>
-      <li>
-        <span class="text-gray-700">Draw:</span>
-        <span class="font-bold ml-2"><%= fixture.odds.draw_odds %></span>
-      </li>
-    </ul>
-    <div class="flex justify-center mt-4">
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-click="bet_now">
-        Bet Now
-      </button>
-    </div>
- </div>
-<% end %>
 
+    <div
+      class="max-w-lg mx-auto bg-white rounded-lg border-b border-blue-900 shadow-md overflow-hidden"
+    >
+      <div class="px-6 py-4">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <div class="text-normal font-semibold">
+              <%= fixture.match_date %>
+            </div>
+          </div>
+          <div>
+            <div class="text-normal font-semibold">
+              <%= fixture.team1.name %>
+            </div>
+            <div>Goals: <%= fixture.result.team1_score %></div>
+          </div>
+          <div>
+            <div class="text-normal font-semibold">
+              <%= fixture.team2.name %>
+            </div>
+            <div>Goals: <%= fixture.result.team2_score %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
   </div>
 </div>
 <!-- footer component -->
