@@ -157,8 +157,36 @@
 
     <p class="mt-5 text-center">Football Betting Odds</p>
   </div>
-  <div class="w-3/12 bg-blue-400">
+  <div class="w-3/12 p-4">
     <h3>Results</h3>
+    <%= for fixture <- @fixtures do %>
+
+    <div
+      class="max-w-lg mx-auto bg-white rounded-lg border-b border-blue-900 shadow-md overflow-hidden"
+    >
+      <div class="px-6 py-4">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <div class="text-normal font-semibold">
+              <%= fixture.match_date %>
+            </div>
+          </div>
+          <div>
+            <div class="text-normal font-semibold">
+              <%= fixture.team1.name %>
+            </div>
+            <div>Goals: <%= fixture.result.team1_score %></div>
+          </div>
+          <div>
+            <div class="text-normal font-semibold">
+              <%= fixture.team2.name %>
+            </div>
+            <div>Goals: <%= fixture.result.team2_score %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
   </div>
 </div>
 <!-- footer component -->
