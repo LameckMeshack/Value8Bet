@@ -211,6 +211,7 @@ defmodule Value8.Games do
   """
   def list_fixtures do
     Repo.all(Fixture)
+    |> Repo.preload([:team1, :team2, :odds])
   end
 
   @doc """

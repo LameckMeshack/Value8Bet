@@ -4,8 +4,9 @@ defmodule Value8Web.PageController do
   def home(conn, _params) do
     # Get Categories
     categories = Value8.Games.list_categories()
+    fixtures = Value8.Games.list_fixtures()
 
 
-    render(conn, :home, layout: false, categories: categories)
+    render(conn, :home, layout: false, categories: categories, fixtures: fixtures)
   end
 end
