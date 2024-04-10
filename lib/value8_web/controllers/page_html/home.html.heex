@@ -2,8 +2,55 @@
 
 <div class="px-4 py-4 w-7/7 flex">
   <!-- component -->
-  <div class="w-2/6 bg-blue-300">
-    <h3>Fixtures</h3>
+  <div class="w-2/6">
+    <h3>Sports Categories</h3>
+    <div class="w-full">
+      <div class="border-b border-gray-200">
+        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+          <%= for category <- @categories do %>
+          <a
+            href="#"
+            class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+          >
+            <%= category.name %>
+          </a>
+          <% end %>
+        </nav>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+          <div
+            class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+          >
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Category Name
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <%= for category <- @categories do %>
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm text-gray-900">
+                      <%= category.name %>
+                    </div>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- This is an example component -->
   <div class="w-2/6">
