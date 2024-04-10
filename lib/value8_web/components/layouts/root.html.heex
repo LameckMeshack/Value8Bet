@@ -73,9 +73,23 @@
         <li class="text-[0.8125rem]  leading-6 text-zinc-900">
           <%= @current_user.username %>
           <%= if @current_user.admin do %>
-  admin
+    <li>
+         <%= if @conn.request_path == "/admin/home" do %>
+  <.link
+    href={~p"/"}
+    class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+  >
+    Switch to User
+  </.link>
 <% else %>
-  user
+  <.link
+    href={~p"/admin/home"}
+    class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+  >
+    Switch to Admin
+  </.link>
+<% end %>
+        </li>
 <% end %>
         </li>
         <li>
