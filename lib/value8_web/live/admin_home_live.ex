@@ -17,6 +17,12 @@ end
     {:noreply, assign(socket, selected_section: section, selected_user: selected_user)}
   end
 
+  def handle_event("delete_user", %{"user_id" => user_id}, socket) do
+    Accounts.delete_user(user_id)
+    users = Accounts.list_users()
+    {:noreply, assign(socket, users: users)}
+  end
+
 # def handle_event("select_section", %{"section" => "view_user", "user_id" => user_id}, socket) do
 #   selected_user = Accounts.get_user!(user_id)
 #   {:noreply, assign(socket, selected_user: selected_user)}

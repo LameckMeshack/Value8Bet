@@ -9,10 +9,12 @@ defmodule Value8.Accounts do
   alias Value8.Accounts.{User, UserToken, UserNotifier}
 
   ## Database getters
-  def list_users do
-    Repo.all(User)
-    |> Repo.preload([:bets,:admin, admin: :permissions])
-  end
+def list_users do
+  User
+  |> where([u], is_nil(u.deleted_at))
+  |> Repo.all()
+  |> Repo.preload([:bets, :admin, admin: :permissions])
+end
 
   @doc """
   Gets a user by email.
@@ -285,7 +287,8 @@ defmodule Value8.Accounts do
   def delete_user(id) do
     user = get_user!(id)
     user
-    |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now()})
+    # |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now()})
+    |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
     |> Repo.update()
   end
 
