@@ -5,6 +5,9 @@ defmodule Value8.Accounts.User do
   schema "users" do
     field :email, :string
     field :username, :string
+    field :first_name, :string
+    field :last_name, :string
+    field :phone, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :utc_datetime
@@ -42,9 +45,13 @@ defmodule Value8.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :username, :password])
+    |> cast(attrs, [:email, :username,:first_name,:last_name, :phone, :password])
     |> validate_username()
     |> validate_email(opts)
+    |> validate_phone()
+    |> validate_name_field(:first_name)
+    |> validate_name_field(:last_name)
+    # |> validate_name_field(:username)
     |> validate_password(opts)
   end
 
@@ -60,6 +67,20 @@ defmodule Value8.Accounts.User do
     changeset
     |> validate_required([:username])
     |> validate_length(:username, min: 3, max: 30)
+    |> unique_constraint(:username)
+  end
+
+  defp validate_name_field(changeset, field) do
+  changeset
+  |> validate_required([field])
+  |> validate_length(field, min: 3, max: 30)
+end
+
+  defp validate_phone(changeset) do
+    changeset
+    |> validate_required([:phone])
+    |> validate_format(:phone, ~r/^[0-9]{10,14}$/, message: "must be a valid phone number")
+    |> unique_constraint(:phone, message: "phone number has already been registered")
   end
 
   defp validate_password(changeset, opts) do

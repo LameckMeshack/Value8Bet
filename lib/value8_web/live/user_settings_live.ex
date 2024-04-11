@@ -5,12 +5,12 @@ defmodule Value8Web.UserSettingsLive do
 
   def render(assigns) do
     ~H"""
-    <.header class="text-center">
+    <.header class="text-center w-6/12 mx-auto">
       Account Settings
       <:subtitle>Manage your account email address and password settings</:subtitle>
     </.header>
 
-    <div class="space-y-12 divide-y">
+    <div class="space-y-12 h-[40vh] w-4/12 mx-auto divide-y">
       <div>
         <.simple_form
           for={@email_form}
@@ -20,6 +20,9 @@ defmodule Value8Web.UserSettingsLive do
         >
           <.input field={@email_form[:email]} type="email" label="Email" required />
           <.input field={@email_form[:username]} type="text" label="Username" required />
+          <.input field={@email_form[:first_name]} type="text" label="First Name" required />
+          <.input field={@email_form[:last_name]} type="text" label="Last Name" required />
+          <.input field={@email_form[:phone]} type="tel" label="Phone No." required />
           <.input
             field={@email_form[:current_password]}
             name="current_password"
