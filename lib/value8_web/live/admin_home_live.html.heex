@@ -224,12 +224,14 @@
     <p>Selected section: <%= @selected_section %></p>
     <%= if @selected_section == "users" do %>
     <div>
-
     <.live_component module={Value8Web.UserComponent} id={"table"} users={@users} />
-
-</div>
-     <% end %>
-
+    </div>
+    <% end %>
+     <%= if @selected_section == "view_user" do %>
+     <div>
+       <.live_component module={Value8Web.ViewUser} id={"user"} users={@users} />
+     </div>
+<% end %>
     
   </div>
 </div>

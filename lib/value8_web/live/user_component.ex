@@ -1,16 +1,6 @@
 defmodule Value8Web.UserComponent do
  use Phoenix.LiveComponent
 
-# def render(assigns) do
-#     ~H"""
-#     <div>
-#     <%= inspect(@user) %>
-#       <p>Email: <%= @user.email %></p>
-#       <p>Username: <%= @user.username %></p>
-#     </div>
-#     """
-#  end
-
 def render(assigns) do
     ~H"""
     <div class="flex flex-wrap -mx-3 mb-5">
@@ -82,7 +72,14 @@ def render(assigns) do
                            <span class="text-center align-baseline inline-flex px-4 py-3 mr-auto items-center font-normal text-[.95rem] leading-none text-primary bg-primary-light rounded-lg"> 0 </span>
                         </td>
                         <td class="p-3 flex text-start">
-                          <button class="ml-auto relative text-secondary-dark bg-light-dark hover:text-primary flex items-center h-[25px] w-[25px] text-base font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl duration-200 ease-in-out shadow-none border-0 justify-center">
+                          <button
+
+                          phx-click="select_section"
+            phx-value-section="view_user"
+
+
+
+                          class="ml-auto relative text-secondary-dark bg-light-dark hover:text-primary flex items-center h-[25px] w-[25px] text-base font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl duration-200 ease-in-out shadow-none border-0 justify-center">
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
   <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
