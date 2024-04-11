@@ -11,6 +11,7 @@ defmodule Value8.Accounts do
   ## Database getters
   def list_users do
     Repo.all(User)
+    |> Repo.preload([:bets,:admin, admin: :permissions])
   end
 
   @doc """

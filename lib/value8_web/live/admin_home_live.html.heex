@@ -224,9 +224,9 @@
     <p>Selected section: <%= @selected_section %></p>
     <%= if @selected_section == "users" do %>
     <div>
- <%= for user <- @users do %>
-    <.live_component module={Value8Web.UserComponent} id={user.id} user={user} />
- <% end %>
+
+    <.live_component module={Value8Web.UserComponent} id={"table"} users={@users} />
+
 </div>
      <% end %>
 
