@@ -10,6 +10,7 @@ defmodule Value8Web.ViewUser do
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
       <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg font-medium leading-6 text-gray-900">User Details</h3>
+    
       </div>
       <div class="border-t border-gray-200">
         <dl>

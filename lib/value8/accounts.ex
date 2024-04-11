@@ -66,7 +66,8 @@ defmodule Value8.Accounts do
   def get_all_user_data(id) do
     user = get_user!(id)
     user
-    |> Repo.preload([:bets,:admin, admin: :permissions])
+    # |> Repo.preload([:bets,:admin, admin: :permissions])
+    |> Repo.preload([:admin, admin: :permissions, bets: [:user, :fixture, :selected_team]])
   end
 
   ## User registration
