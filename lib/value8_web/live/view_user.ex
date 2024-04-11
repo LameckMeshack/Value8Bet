@@ -1,4 +1,5 @@
 defmodule Value8Web.ViewUser do
+  alias Value8.Accounts
   use Phoenix.LiveComponent
 
   def render(assigns) do
@@ -84,7 +85,7 @@ defmodule Value8Web.ViewUser do
       </div>
 
       <!-- Action buttons -->
-      <% if is_admin && !is_superadmin do %>
+      <%= if is_admin && !is_superadmin do %>
         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
           <!-- Button to toggle admin status -->
           <button class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -100,7 +101,7 @@ defmodule Value8Web.ViewUser do
   def handle_event("delete_user", _params, socket) do
     # get user id and delete it
     user_id = socket.assigns[:selected_user].id
-    {:ok, _} = Users.delete_user(user_id)
+    {:ok, _} = Accounts.delete_user(user_id)
     {:noreply, socket}
   end
 end

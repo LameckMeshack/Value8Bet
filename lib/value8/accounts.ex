@@ -284,13 +284,29 @@ end
  @doc """
  Soft deletes the user with the given id.
  """
-  def delete_user(id) do
-    user = get_user!(id)
-    user
-    # |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now()})
-    |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
-    |> Repo.update()
-  end
+  # def delete_user(id) do
+  #   user = get_user!(id)
+  #   user
+  #   # |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now()})
+  #   |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
+  #   |> Repo.update()
+  # end
+
+def delete_user(id) do
+  user = get_all_user_data(id)
+
+  # Soft delete the user
+  user_changeset = Ecto.Changeset.change(user, %{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
+  Repo.update(user_changeset)
+
+  # Soft delete all bets associated with the user
+  user.bets
+  |> Enum.each(fn bet ->
+      bet_changeset = Ecto.Changeset.change(bet, %{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
+      Repo.update(bet_changeset)
+  end)
+end
+
 
   @doc """
   Confirms a user by the given token.
