@@ -10,17 +10,22 @@ defmodule Value8Web.UserSettingsLive do
       <:subtitle>Manage your account email address and password settings</:subtitle>
     </.header>
 
-    <div class="space-y-12 h-[40vh] w-4/12 mx-auto divide-y">
-      <div>
+    <div class=" w-8/12 mx-auto flex  h-[40vh]  divide-x">
+      <div class="w-8/12  p-2">
         <.simple_form
           for={@email_form}
           id="email_form"
           phx-submit="update_email"
           phx-change="validate_email"
+          class="w-8/12 mx-auto  "
         >
+        <div class="   mx-auto gap-4 flex">
+        <div class="w-6/12">
           <.input field={@email_form[:email]} type="email" label="Email" required />
           <.input field={@email_form[:username]} type="text" label="Username" required />
           <.input field={@email_form[:first_name]} type="text" label="First Name" required />
+          </div>
+          <div class="w-6/12">
           <.input field={@email_form[:last_name]} type="text" label="Last Name" required />
           <.input field={@email_form[:phone]} type="tel" label="Phone No." required />
           <.input
@@ -32,12 +37,14 @@ defmodule Value8Web.UserSettingsLive do
             value={@email_form_current_password}
             required
           />
+          </div>
+          </div>
           <:actions>
             <.button phx-disable-with="Changing...">Change Email</.button>
           </:actions>
         </.simple_form>
       </div>
-      <div>
+     <div class="w-4/12 p-2">
         <.simple_form
           for={@password_form}
           id="password_form"
@@ -47,6 +54,8 @@ defmodule Value8Web.UserSettingsLive do
           phx-submit="update_password"
           phx-trigger-action={@trigger_submit}
         >
+         <div class="   mx-auto gap-4 flex">
+        <div class="w-6/12">
           <.input
             field={@password_form[:email]}
             type="hidden"
@@ -59,6 +68,8 @@ defmodule Value8Web.UserSettingsLive do
             type="password"
             label="Confirm new password"
           />
+          </div>
+          <div class="w-6/12">
           <.input
             field={@password_form[:current_password]}
             name="current_password"
@@ -68,6 +79,8 @@ defmodule Value8Web.UserSettingsLive do
             value={@current_password}
             required
           />
+          </div>
+          </div>
           <:actions>
             <.button phx-disable-with="Changing...">Change Password</.button>
           </:actions>
