@@ -5,6 +5,7 @@ def render(assigns) do
     ~H"""
     <div>
 Thus is a single user
+<%= inspect(@selected_user) %>
     </div>
     """
  end

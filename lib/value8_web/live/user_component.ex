@@ -4,6 +4,7 @@ defmodule Value8Web.UserComponent do
 def render(assigns) do
     ~H"""
     <div class="flex flex-wrap -mx-3 mb-5">
+
     <div class="w-full max-w-full px-3 mb-6  mx-auto">
           <div class="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] bg-white m-5">
             <div class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30">
@@ -14,7 +15,7 @@ def render(assigns) do
                   <span class="mt-1 font-medium text-secondary-dark text-lg/normal">All user from the Valu8Bet team</span>
                 </h3>
                 <div class="relative flex flex-wrap items-center my-2">
-                  <a href="javascript:void(0)" class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light"> See other projects </a>
+                  <a href="javascript:void(0)" class="inline-block text-[.925rem] font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl duration-150 ease-in-out text-light-inverse bg-light-dark border-light shadow-none border-0 py-2 px-5 hover:bg-secondary active:bg-light focus:bg-light">  </a>
                 </div>
               </div>
               <!-- end card header -->
@@ -76,6 +77,8 @@ def render(assigns) do
 
                           phx-click="select_section"
             phx-value-section="view_user"
+             phx-value-user_id={user.id}
+
 
 
 

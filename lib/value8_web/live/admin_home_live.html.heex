@@ -39,6 +39,8 @@
           <button
             phx-click="select_section"
             phx-value-section="dashboard"
+             phx-value-user_id={@current_user.id }
+           
             
             class={[ "middle none font-sans font-bold center   text-xs py-3 rounded-lg   text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize", @selected_section == "dashboard" && "bg-blue-600"]}
             type="button"
@@ -68,6 +70,7 @@
           <button
             phx-click="select_section"
             phx-value-section="users"
+                  phx-value-user_id={@current_user.id }
            class={[ "middle none font-sans font-bold center   text-xs py-3 rounded-lg   text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize", @selected_section == "users" && "bg-blue-600"]}
             type="button"
           >
@@ -95,6 +98,7 @@
           <button
             phx-click="select_section"
             phx-value-section="seee"
+                  phx-value-user_id={@current_user.id }
            class={[ "middle none font-sans font-bold center   text-xs py-3 rounded-lg   text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize", @selected_section == "seee" && "bg-blue-600"]}
             type="button"
           >
@@ -122,6 +126,7 @@
           <button
             phx-click="select_section"
             phx-value-section="notifactions"
+              phx-value-user_id={@current_user.id }
             class={[ "middle none font-sans font-bold center   text-xs py-3 rounded-lg   text-white hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize", @selected_section == "notifactions" && "bg-blue-600"]}
             type="button"
           >
@@ -229,7 +234,7 @@
     <% end %>
      <%= if @selected_section == "view_user" do %>
      <div>
-       <.live_component module={Value8Web.ViewUser} id={"user"} users={@users} />
+       <.live_component module={Value8Web.ViewUser} id={"user"} selected_user={@selected_user} />
      </div>
 <% end %>
     
