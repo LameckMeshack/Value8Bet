@@ -49,6 +49,7 @@
           </div>
           <div class="flex justify-center items-center">
             <button
+          
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
               Bet Now
@@ -159,6 +160,10 @@
     </div>
 
     <p class="mt-5 text-center">Football Betting Odds</p>
+
+
+
+
 
     <%= for fixture <- @fixtures do %> <.live_component @socket
     module={Value8Web.FixtureLive} id={fixture.id} fixture={fixture} /> <% end

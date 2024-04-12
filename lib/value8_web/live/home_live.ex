@@ -1,6 +1,6 @@
 defmodule Value8Web.HomeLive do
   alias Value8.Games
- use Phoenix.LiveView
+ use Value8Web, :live_view
 
 
 

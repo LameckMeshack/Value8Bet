@@ -1,5 +1,6 @@
 defmodule Value8Web.FixtureLive do
  use Phoenix.LiveComponent
+  use Value8Web, :live_view
 
  def render(assigns) do
     ~H"""
@@ -38,9 +39,19 @@ defmodule Value8Web.FixtureLive do
         </li>
       </ul>
       <div class="flex justify-center mt-4">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-click="bet_now">
+        <button
+        phx-click={show_modal("user-modal")}
+         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-click="bet_now">
           Bet Now
         </button>
+
+              <.modal
+    id="user-modal"
+    >
+
+   <%= inspect(@fixture) %>
+
+  </.modal>
       </div>
     </div>
     """
