@@ -39,26 +39,15 @@ defmodule Value8Web.FixtureLive do
         </li>
       </ul>
       <div class="flex justify-center mt-4">
-        <button
-        phx-click={show_modal("user-modal")}
-         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" phx-click="bet_now">
-          Bet Now
-        </button>
+       <button
+  phx-click="bet_now"
+  phx-value-id={@fixture.id}
+  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  Bet Now
+</button>
 
-              <.modal
-    id="user-modal"
-    >
-
-   <%= inspect(@fixture) %>
-
-  </.modal>
       </div>
     </div>
     """
- end
-
- def handle_event("bet_now", _value, socket) do
-    # Handle the bet now action here
-    {:noreply, socket}
  end
 end

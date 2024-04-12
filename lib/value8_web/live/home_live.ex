@@ -10,4 +10,8 @@ defmodule Value8Web.HomeLive do
     {:ok, assign(socket, categories: categories, fixtures: fixtures)}
  end
 
+   def handle_event("bet_now", %{"id" => id}, socket) do
+    {:noreply, push_redirect(socket, to: "/fixture/#{id}")}
+  end
+
 end
