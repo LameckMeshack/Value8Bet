@@ -45,14 +45,33 @@ defmodule Value8Web.ViewUser do
 
           <!-- Button to toggle admin status -->
           <%= if is_admin do %>
-            <button class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            <button
+             phx-click="revoke_admin"
+            phx-value-user_id={user.id}
+
+            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
               Revoke Admin
             </button>
           <% else %>
-            <button class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+            <button
+
+            phx-click="make_admin"
+            phx-value-user_id={user.id}
+
+            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
               Make Admin
             </button>
           <% end %>
+
+            <!-- Action buttons -->
+      <%= if is_admin && !is_superadmin do %>
+        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+          <!-- Button to toggle admin status -->
+          <button class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            Grant Superadmin
+          </button>
+        </div>
+      <% end %>
         </div>
       <% end %>
 
@@ -85,37 +104,35 @@ defmodule Value8Web.ViewUser do
         </dl>
       </div>
 
-      <!-- Action buttons -->
-      <%= if is_admin && !is_superadmin do %>
-        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-          <!-- Button to toggle admin status -->
-          <button class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-            Grant Admin
-          </button>
-        </div>
-      <% end %>
+
     </div>
     """
   end
 
 
-  # def handle_event("delete_user", _params, socket) do
-  #   # get user id and delete it
-  #   user_id = socket.assigns[:selected_user].id
-  #   {:ok, _} = Accounts.delete_user(user_id)
-  #   {:noreply, socket}
+  def handle_event("delete_user", %{"user_id" => user_id}, socket) do
+    Accounts.delete_user(user_id)
+    socket =
+      socket
+      |> put_flash(:info, "User deleted successfully.")
+    {:noreply, push_event(socket, "update_section", value: "dashboard")}
+  end
+
+  # def handle_event("make_admin", %{"user_id" => user_id}, socket) do
+  #   Accounts.make_admin(user_id)
+  #   socket =
+  #     socket
+  #     |> put_flash(:info, "User is now an admin.")
+  #   {:noreply, push_event(socket, "update_section", value: "dashboard")}
   # end
 
-  def handle_event("delete_user", %{"user_id" => user_id}, socket) do
-  Accounts.delete_user(user_id)
-
-  socket =
-    socket
-    |> put_flash(:info, "User deleted successfully.")
-
-  {:noreply, push_event(socket, "update_section", value: "dashboard")}
-end
-
+  # def handle_event("revoke_admin", %{"user_id" => user_id}, socket) do
+  #   Accounts.remove_admin(user_id)
+  #   socket =
+  #     socket
+  #     |> put_flash(:info, "User is no longer an admin.")
+  #   {:noreply, push_event(socket, "update_section", value: "dashboard")}
+  # end
 
 
 end

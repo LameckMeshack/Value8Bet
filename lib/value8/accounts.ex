@@ -312,7 +312,7 @@ def delete_user(id) do
 
 
   admin = Repo.get_by(Admin, user_id: id)
-  
+
       if admin != nil do
       admin
       |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
@@ -324,6 +324,25 @@ def delete_user(id) do
 
 
 
+end
+
+def make_admin(id) do
+  # user = get_user!(id)
+  admin = Repo.get_by(Admin, user_id: id)
+
+  if admin == nil do
+    %Admin{user_id: id}
+    |> Repo.insert()
+  end
+end
+
+def remove_admin(id) do
+  admin = Repo.get_by(Admin, user_id: id)
+
+  if admin != nil do
+    #delete admin
+    Repo.delete(admin)
+  end
 end
 
 

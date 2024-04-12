@@ -25,6 +25,7 @@ def handle_event("delete_user", %{"user_id" => user_id}, socket) do
   socket =
     socket
     |> assign(:users, users)
+     |> assign(:selected_section, "users")
     |> put_flash(:info, "User deleted successfully.")
   {:noreply, socket}
 end
@@ -34,5 +35,30 @@ def handle_event("update_section", value, socket) do
 end
 
 
+
+
+  def handle_event("make_admin", %{"user_id" => user_id}, socket) do
+     user_id = String.to_integer(user_id)
+   Accounts.make_admin(user_id)
+  users = Accounts.list_users()
+  socket =
+    socket
+    |> assign(:users, users)
+    |> assign(:selected_section, "users")
+    |> put_flash(:info, "User is now an admin.")
+  {:noreply, socket}
+end
+
+def handle_event("revoke_admin", %{"user_id" => user_id}, socket) do
+  user_id = String.to_integer(user_id)
+  Accounts.remove_admin(user_id)
+  users = Accounts.list_users()
+  socket =
+    socket
+    |> assign(:users, users)
+     |> assign(:selected_section, "users")
+    |> put_flash(:info, "User is no longer an admin.")
+  {:noreply, socket}
+end
 
 end
