@@ -38,6 +38,7 @@ defmodule Value8Web.ViewUser do
           <!-- Button to delete user -->
           <button
             phx-click="delete_user"
+            phx-value-user_id={user.id}
           class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
             Delete User
           </button>
@@ -98,10 +99,23 @@ defmodule Value8Web.ViewUser do
   end
 
 
-  def handle_event("delete_user", _params, socket) do
-    # get user id and delete it
-    user_id = socket.assigns[:selected_user].id
-    {:ok, _} = Accounts.delete_user(user_id)
-    {:noreply, socket}
-  end
+  # def handle_event("delete_user", _params, socket) do
+  #   # get user id and delete it
+  #   user_id = socket.assigns[:selected_user].id
+  #   {:ok, _} = Accounts.delete_user(user_id)
+  #   {:noreply, socket}
+  # end
+
+  def handle_event("delete_user", %{"user_id" => user_id}, socket) do
+  Accounts.delete_user(user_id)
+
+  socket =
+    socket
+    |> put_flash(:info, "User deleted successfully.")
+
+  {:noreply, push_event(socket, "update_section", value: "dashboard")}
+end
+
+
+
 end
