@@ -20,10 +20,20 @@ defmodule Value8.Bets.Bet do
     timestamps(type: :utc_datetime)
   end
 
+  @spec changeset(
+          {map(), map()}
+          | %{
+              :__struct__ => atom() | %{:__changeset__ => map(), optional(any()) => any()},
+              optional(atom()) => any()
+            },
+          :invalid | %{optional(:__struct__) => none(), optional(atom() | binary()) => any()}
+        ) :: Ecto.Changeset.t()
   @doc false
   def changeset(bet, attrs) do
-    bet
-    |> cast(attrs, [:selected_result, :amount, :potential_payout, :status, :result])
-    |> validate_required([:selected_result, :amount, :potential_payout, :status, :result])
-  end
+  bet
+  |> cast(attrs, [:status, :amount, :potential_payout, :selected_result, :user_id, :fixture_id, :selected_team_id])
+  |> validate_required([:status, :amount, :potential_payout, :selected_result, :user_id, :fixture_id, :selected_team_id])
+  |> validate_inclusion(:status, [:pending])
+  |> validate_inclusion(:selected_result, [:team1, :team2, :draw])
+end
 end

@@ -1,44 +1,79 @@
 <div class="container mx-auto px-4 py-5">
- <h1 class="text-2xl font-bold mb-4">
+  <.flash_group flash={@flash} />
+
+  <h1 class="text-2xl font-bold mb-4">
     <%= @fixture.team1.name %> vs <%= @fixture.team2.name %>
- </h1>
- <p class="text-gray-700 text-sm mb-4">
-    Match Date: <%= @fixture.match_date %> Match Time: <%= @fixture.match_time %>
- </p>
- <form phx-submit="place_bet">
+  </h1>
+  <p class="text-gray-700 text-sm mb-4">
+    Match Date: <%= @fixture.match_date %> Match Time: <%= @fixture.match_time
+    %>
+  </p>
+  <form phx-submit="place_bet">
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="bet-option">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="bet-option"
+        >
           Select Your Bet
         </label>
         <div class="flex items-center">
-          <input class="form-radio text-blue-500" type="radio" name="bet_option" id="team1-bet" value="team1" />
+          <input
+            class="form-radio text-blue-500"
+            type="radio"
+            name="bet_option"
+            id="team1-bet"
+            value="team1"
+          />
           <label class="ml-2 text-gray-700" for="team1-bet">
             <%= @fixture.team1.name %> (Odds: <%= @fixture.odds.team1_odds %>)
           </label>
         </div>
         <div class="flex items-center">
-          <input class="form-radio text-blue-500" type="radio" name="bet_option" id="team2-bet" value="team2" />
+          <input
+            class="form-radio text-blue-500"
+            type="radio"
+            name="bet_option"
+            id="team2-bet"
+            value="team2"
+          />
           <label class="ml-2 text-gray-700" for="team2-bet">
             <%= @fixture.team2.name %> (Odds: <%= @fixture.odds.team2_odds %>)
           </label>
         </div>
         <div class="flex items-center">
-          <input class="form-radio text-blue-500" type="radio" name="bet_option" id="draw-bet" value="draw" />
-          <label class="ml-2 text-gray-700" for="draw-bet"> Draw (Odds: <%= @fixture.odds.draw_odds %>) </label>
+          <input
+            class="form-radio text-blue-500"
+            type="radio"
+            name="bet_option"
+            id="draw-bet"
+            value="draw"
+          />
+          <label class="ml-2 text-gray-700" for="draw-bet">
+            Draw (Odds: <%= @fixture.odds.draw_odds %>)
+          </label>
         </div>
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
           Bet Amount
         </label>
-        <input class="form-input mt-1 block w-full" type="number" name="amount" id="amount" required />
+        <input
+          class="form-input mt-1 block w-full"
+          type="number"
+          name="amount"
+          id="amount"
+          required
+        />
       </div>
       <div class="flex items-center justify-between">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          type="submit"
+        >
           Place Bet
         </button>
       </div>
     </div>
- </form>
+  </form>
 </div>

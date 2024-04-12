@@ -40,8 +40,8 @@ defmodule Value8Web.FixtureLive do
       </ul>
       <div class="flex justify-center mt-4">
        <button
-  phx-click="bet_now"
-  phx-value-id={@fixture.id}
+    phx-click="bet_now"
+    phx-value-id={@fixture.id}
   class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
   Bet Now
 </button>
