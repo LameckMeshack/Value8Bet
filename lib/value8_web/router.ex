@@ -71,7 +71,7 @@ defmodule Value8Web.Router do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
       # view single fixture
-      # live "/fixture/:id", FixtureLive, :index
+      live "/fixture/:id", FixtureBetLive, :index
 
     end
   end

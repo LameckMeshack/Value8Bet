@@ -11,7 +11,7 @@ defmodule Value8.Games.Fixture do
     has_one :result, Value8.Games.Result
     has_one :odds, Value8.Bets.Odds
     has_many :bets, Value8.Bets.Bet
-     field :deleted_at, :utc_datetime
+    field :deleted_at, :utc_datetime
 
     timestamps(type: :utc_datetime)
   end

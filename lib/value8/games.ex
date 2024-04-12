@@ -228,7 +228,11 @@ defmodule Value8.Games do
       ** (Ecto.NoResultsError)
 
   """
-  def get_fixture!(id), do: Repo.get!(Fixture, id)
+ def get_fixture!(id) do
+  fixture = Repo.get!(Fixture, id)
+  fixture = Repo.preload(fixture, [:odds, :team1, :team2])
+  fixture
+end
 
   @doc """
   Creates a fixture.
