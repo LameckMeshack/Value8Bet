@@ -310,20 +310,14 @@ def delete_user(id) do
     |> Repo.update()
   end)
 
-  # soft delete admin
-  # admin = Repo.get_by(Admin, user_id: id)
-  # if admin != nil do
-  #   admin
-  #   |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
-  #   |> Repo.update()
-  # end
 
-admin = Repo.get_by(Admin, user_id: id)
-if admin != nil do
- admin
- |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
- |> Repo.update()
-end
+  admin = Repo.get_by(Admin, user_id: id)
+  
+      if admin != nil do
+      admin
+      |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
+      |> Repo.update()
+  end
 
 
 
