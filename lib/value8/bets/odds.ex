@@ -6,6 +6,7 @@ defmodule Value8.Bets.Odds do
     field :team1_odds, :decimal
     field :team2_odds, :decimal
     field :draw_odds, :decimal
+     field :deleted_at, :utc_datetime
     # field :fixture_id, :id
     belongs_to :fixture, Value8.Games.Fixture
 

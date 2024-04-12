@@ -4,6 +4,7 @@ defmodule Value8.Accounts.Permission do
 
   schema "permissions" do
     field :name, :string
+    field :deleted_at, :utc_datetime
     # field :admin_id, :id
     belongs_to :admin, Value8.Accounts.Admin
 

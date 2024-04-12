@@ -5,6 +5,7 @@ defmodule Value8.Games.Team do
   schema "teams" do
     field :name, :string
     field :abrrv, :string
+     field :deleted_at, :utc_datetime
     belongs_to :category, Value8.Games.Category
     has_many :home_fixtures, Value8.Games.Fixture, foreign_key: :team1_id
     has_many :away_fixtures, Value8.Games.Fixture, foreign_key: :team2_id

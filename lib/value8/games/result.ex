@@ -6,7 +6,9 @@ defmodule Value8.Games.Result do
     field :result, Ecto.Enum, values: [:team1, :team2, :draw]
     field :team1_score, :integer
     field :team2_score, :integer
+     field :deleted_at, :utc_datetime
     belongs_to :fixture, Value8.Games.Fixture
+
 
     timestamps(type: :utc_datetime)
   end

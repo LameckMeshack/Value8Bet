@@ -6,6 +6,7 @@ defmodule Value8.Accounts.Admin do
 
     belongs_to :user, Value8.Accounts.User
     has_many :permissions, Value8.Accounts.Permission
+    field :deleted_at, :utc_datetime
 
     timestamps(type: :utc_datetime)
   end

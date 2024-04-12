@@ -4,9 +4,10 @@ defmodule Value8.Accounts do
   """
 
   import Ecto.Query, warn: false
+  alias Value8.Bets.Bet
   alias Value8.Repo
 
-  alias Value8.Accounts.{User, UserToken, UserNotifier}
+  alias Value8.Accounts.{User,Admin,UserToken, UserNotifier}
 
   ## Database getters
 def list_users do
@@ -292,19 +293,43 @@ end
   #   |> Repo.update()
   # end
 
+
+
 def delete_user(id) do
-  user = get_all_user_data(id)
+  #soft delete user with the given id deleting bets , admin
+  user = get_user!(id)
+  user
+  |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
+  |> Repo.update()
 
-  # Soft delete the user
-  user_changeset = Ecto.Changeset.change(user, %{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
-  Repo.update(user_changeset)
-
-  # Soft delete all bets associated with the user
-  user.bets
-  |> Enum.each(fn bet ->
-      bet_changeset = Ecto.Changeset.change(bet, %{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
-      Repo.update(bet_changeset)
+  # soft delete bets
+  bets = Repo.all(from b in Bet, where: b.user_id == ^id)
+  Enum.each(bets, fn bet ->
+    bet
+    |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
+    |> Repo.update()
   end)
+
+  # soft delete admin
+  # admin = Repo.get_by(Admin, user_id: id)
+  # if admin != nil do
+  #   admin
+  #   |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
+  #   |> Repo.update()
+  # end
+
+admin = Repo.get_by(Admin, user_id: id)
+if admin != nil do
+ admin
+ |> Ecto.Changeset.change(%{deleted_at: DateTime.utc_now() |> DateTime.truncate(:second)})
+ |> Repo.update()
+end
+
+
+
+
+
+
 end
 
 

@@ -8,6 +8,7 @@ defmodule Value8.Bets.Bet do
     field :selected_result, Ecto.Enum, values: [:team1, :team2, :draw]
     field :amount, :decimal
     field :potential_payout, :decimal
+    field :deleted_at, :utc_datetime
     # field :user_id, :id
     # field :fixture_id, :id
     # field :selected_team_id, :id
