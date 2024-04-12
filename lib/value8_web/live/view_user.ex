@@ -5,12 +5,13 @@ defmodule Value8Web.ViewUser do
   def render(assigns) do
     user = assigns[:selected_user]
     is_admin = user.admin != nil
-    is_superadmin = is_admin && Enum.any?(user.admin.permissions, fn p -> p.name == "superadmin" end)
-
+    is_superadmin = assigns[:is_superadmin]
+    # is_superadmin = is_admin && Enum.any?(user.admin.permissions, fn p -> p.name == "superadmin" end)
+  #  check if current user in superadmin
    ~H"""
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
       <div class="px-4 py-5 sm:px-6">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">User Details</h3>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">User Details </h3>
       </div>
       <div class="border-t border-gray-200">
         <dl>
@@ -33,7 +34,8 @@ defmodule Value8Web.ViewUser do
 
 
            <!-- Action buttons -->
-      <%= if !is_superadmin do %>
+            
+      <%= if is_superadmin do %>
         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
           <!-- Button to delete user -->
           <button

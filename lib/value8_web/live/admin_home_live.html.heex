@@ -225,16 +225,18 @@
   </aside>
 
   <div class="p-4 bg-gray-400 h-[80vh] rounded-xl w-10/10 xl:ml-80">
+
+    <%= inspect(@is_superadmin) %>
    
     <p>Selected section: <%= @selected_section %></p>
     <%= if @selected_section == "users" do %>
     <div>
-    <.live_component module={Value8Web.UserComponent} id={"table"} users={@users} />
+    <.live_component module={Value8Web.UserComponent} id={"table"} users={@users} is_superadmin={@is_superadmin} />
     </div>
     <% end %>
      <%= if @selected_section == "view_user" do %>
      <div>
-       <.live_component module={Value8Web.ViewUser} id={"user"} selected_user={@selected_user} />
+       <.live_component module={Value8Web.ViewUser} id={"user"} selected_user={@selected_user} is_superadmin={@is_superadmin} />
      </div>
 <% end %>
     
