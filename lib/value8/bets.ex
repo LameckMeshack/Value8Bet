@@ -104,15 +104,7 @@ defmodule Value8.Bets do
 
   alias Value8.Bets.Bet
 
-  @doc """
-  Returns the list of bets.
-
-  ## Examples
-
-      iex> list_bets()
-      [%Bet{}, ...]
-
-  """
+ 
   def list_bets do
     Repo.all(Bet)
   end
@@ -123,54 +115,13 @@ def get_bet!(id) do
   bet
 end
 
-  @doc """
-  Creates a bet.
 
-  ## Examples
-
-      iex> create_bet(%{field: value})
-      {:ok, %Bet{}}
-
-      iex> create_bet(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_bet(attrs \\ %{}) do
-    %Bet{}
-    |> Bet.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Updates a bet.
-
-  ## Examples
-
-      iex> update_bet(bet, %{field: new_value})
-      {:ok, %Bet{}}
-
-      iex> update_bet(bet, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def update_bet(%Bet{} = bet, attrs) do
     bet
     |> Bet.changeset(attrs)
     |> Repo.update()
   end
 
-  @doc """
-  Deletes a bet.
-
-  ## Examples
-
-      iex> delete_bet(bet)
-      {:ok, %Bet{}}
-
-      iex> delete_bet(bet)
-      {:error, %Ecto.Changeset{}}
-
-  """
  def delete_bet(bet_id) when is_integer(bet_id) do
   bet = Repo.get!(Bet, bet_id)
   Repo.delete(bet)
