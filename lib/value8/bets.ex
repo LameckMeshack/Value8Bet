@@ -171,20 +171,9 @@ end
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_bet(%Bet{} = bet) do
-    Repo.delete(bet)
-  end
+ def delete_bet(bet_id) when is_integer(bet_id) do
+  bet = Repo.get!(Bet, bet_id)
+  Repo.delete(bet)
+end
 
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking bet changes.
-
-  ## Examples
-
-      iex> change_bet(bet)
-      %Ecto.Changeset{data: %Bet{}}
-
-  """
-  def change_bet(%Bet{} = bet, attrs \\ %{}) do
-    Bet.changeset(bet, attrs)
-  end
 end
