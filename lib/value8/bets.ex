@@ -119,7 +119,7 @@ defmodule Value8.Bets do
 
 def get_bet!(id) do
   bet = Repo.get!(Bet, id)
-  bet = Repo.preload(bet, [:fixture, :selected_team])
+  bet = Repo.preload(bet, [:fixture, :selected_team, fixture: [:team1, :team2]])
   bet
 end
 
