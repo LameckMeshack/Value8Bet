@@ -235,6 +235,12 @@
        <.live_component module={Value8Web.ViewUser} id={"user"} selected_user={@selected_user} is_superadmin={@is_superadmin} />
      </div>
 <% end %>
+
+     <%= if @selected_section == "dashboard" do %>
+     <div>
+       <.live_component module={Value8Web.ProfitLive} id={"dashboard"}  />
+     </div>
+<% end %>
     
   </div>
 </div>
