@@ -1,4 +1,5 @@
 defmodule Value8Web.FixtureBetLive do
+  alias Value8.Bets.BetPlacedNotifier
   use Value8Web, :live_view
 
  alias Value8.Repo
@@ -23,6 +24,7 @@ end
 def handle_event("place_bet", %{"bet_option" => bet_option, "amount" => amount}, socket) do
  current_fixture = socket.assigns.fixture
  user_id = socket.assigns.user_id
+ user_email = socket.assigns.current_user.email
 
  amount_decimal = Decimal.new(amount)
  # Calculate the potential payout based on the bet option and the odds from the fixture
@@ -63,6 +65,7 @@ def handle_event("place_bet", %{"bet_option" => bet_option, "amount" => amount},
     {:ok, _bet} ->
       socket =
         socket |> put_flash(:info, "Bet saved successfully, send confirmation to the user")
+        BetPlacedNotifier.deliver_bet_successfully(user_email, "localhost:4000")
 
       {:noreply, socket}
     {:error, changeset} ->
