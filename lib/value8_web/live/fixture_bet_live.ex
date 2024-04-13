@@ -3,7 +3,7 @@ defmodule Value8Web.FixtureBetLive do
 
  alias Value8.Repo
  alias Value8.Games
- alias Value8.Bets
+#  alias Value8.Bets
 
 
 def mount(params, _session, socket) do
