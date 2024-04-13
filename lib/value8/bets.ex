@@ -104,10 +104,6 @@ defmodule Value8.Bets do
 
   alias Value8.Bets.Bet
 
- 
-  def list_bets do
-    Repo.all(Bet)
-  end
 
 def get_bet!(id) do
   bet = Repo.get!(Bet, id)
@@ -115,12 +111,15 @@ def get_bet!(id) do
   bet
 end
 
+# list user bets
+def list_user_bets(user_id) do
+  Bet
+  |> where(user_id: ^user_id)
+  |> Repo.all()
+  |> Repo.preload( [:fixture, :selected_team,fixture: [:team1, :team2]])
+end
 
-  def update_bet(%Bet{} = bet, attrs) do
-    bet
-    |> Bet.changeset(attrs)
-    |> Repo.update()
-  end
+
 
  def delete_bet(bet_id) when is_integer(bet_id) do
   bet = Repo.get!(Bet, bet_id)

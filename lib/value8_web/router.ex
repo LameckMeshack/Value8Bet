@@ -72,7 +72,9 @@ defmodule Value8Web.Router do
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
       # view single fixture
       live "/fixture/:id", FixtureBetLive, :index
-      live "/bet/:id", BetLive, :index
+      live "my-betting", UserBetLive, :index
+
+      live "/bet/:id", BetLive, :show
 
     end
   end
