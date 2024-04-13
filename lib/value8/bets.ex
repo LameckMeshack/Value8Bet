@@ -117,21 +117,11 @@ defmodule Value8.Bets do
     Repo.all(Bet)
   end
 
-  @doc """
-  Gets a single bet.
-
-  Raises `Ecto.NoResultsError` if the Bet does not exist.
-
-  ## Examples
-
-      iex> get_bet!(123)
-      %Bet{}
-
-      iex> get_bet!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_bet!(id), do: Repo.get!(Bet, id)
+def get_bet!(id) do
+  bet = Repo.get!(Bet, id)
+  bet = Repo.preload(bet, [:fixture, :selected_team])
+  bet
+end
 
   @doc """
   Creates a bet.

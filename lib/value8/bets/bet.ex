@@ -9,9 +9,6 @@ defmodule Value8.Bets.Bet do
     field :amount, :decimal
     field :potential_payout, :decimal
     field :deleted_at, :utc_datetime
-    # field :user_id, :id
-    # field :fixture_id, :id
-    # field :selected_team_id, :id
     belongs_to :user, Value8.Accounts.User
     belongs_to :fixture, Value8.Games.Fixture
     belongs_to :selected_team, Value8.Games.Team
