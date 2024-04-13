@@ -2,6 +2,7 @@ defmodule Value8Web.AdminHomeLive do
   alias Value8.Repo
   alias Value8.Accounts
   use Value8Web, :live_view
+  import Value8Web.Charts
 
 
   def mount(_params, _session, socket) do

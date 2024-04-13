@@ -225,6 +225,11 @@
   </aside>
 
   <div class="p-4 bg-gray-400 h-[80vh] rounded-xl w-10/10 xl:ml-80">
+    <div>
+
+     
+      
+    </div>
     <%= if @selected_section == "users" do %>
     <div>
     <.live_component module={Value8Web.UserComponent} id={"table"} users={@users} is_superadmin={@is_superadmin} />
@@ -238,7 +243,9 @@
 
      <%= if @selected_section == "dashboard" do %>
      <div>
-       <.live_component module={Value8Web.ProfitLive} id={"dashboard"}  />
+      <p>Chart</p>
+ 
+<div class="w-96 bg-white " id="chart"></div>
      </div>
 <% end %>
     
