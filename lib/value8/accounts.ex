@@ -336,6 +336,17 @@ def make_admin(id) do
   end
 end
 
+def make_superadmin(id) do
+  # user = get_user!(id)
+  admin = Repo.get_by(Admin, user_id: id)
+
+  if admin == nil do
+    %Admin{user_id: id}
+    |> Repo.insert()
+  end
+
+end
+
 def remove_admin(id) do
   admin = Repo.get_by(Admin, user_id: id)
 

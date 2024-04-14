@@ -5,8 +5,12 @@ defmodule Value8Web.ViewUser do
   def render(assigns) do
     user = assigns[:selected_user]
     is_admin = user.admin != nil
+    is_superadmin2 = is_admin && Enum.any?(user.admin.permissions, fn p -> p.name == "superadmin" end)
+
+
+
     is_superadmin = assigns[:is_superadmin]
-    # is_superadmin = is_admin && Enum.any?(user.admin.permissions, fn p -> p.name == "superadmin" end)
+
   #  check if current user in superadmin
    ~H"""
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -34,7 +38,7 @@ defmodule Value8Web.ViewUser do
 
 
            <!-- Action buttons -->
-            
+
       <%= if is_superadmin do %>
         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
           <!-- Button to delete user -->
@@ -44,6 +48,7 @@ defmodule Value8Web.ViewUser do
           class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
             Delete User
           </button>
+
 
           <!-- Button to toggle admin status -->
           <%= if is_admin do %>
@@ -66,10 +71,16 @@ defmodule Value8Web.ViewUser do
           <% end %>
 
             <!-- Action buttons -->
-      <%= if is_admin && !is_superadmin do %>
+      <%= if is_admin && is_superadmin do %>
         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
           <!-- Button to toggle admin status -->
-          <button class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          <button
+
+          phx-click="make_superadmin"
+            phx-value-admin_id={user.admin.id}
+
+
+          class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             Grant Superadmin
           </button>
         </div>

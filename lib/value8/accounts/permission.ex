@@ -14,7 +14,8 @@ defmodule Value8.Accounts.Permission do
   @doc false
   def changeset(permission, attrs) do
     permission
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :admin_id])
+    |> validate_required([:name, :admin_id])
+    |> unique_constraint(:name)
   end
 end
