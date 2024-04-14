@@ -38,7 +38,7 @@ defmodule Value8.AccountsFixtures do
       |> Enum.into(%{
 
       })
-      |> Value8.Accounts.create_admin()
+      |> Value8.Accounts.make_admin()
 
     admin
   end

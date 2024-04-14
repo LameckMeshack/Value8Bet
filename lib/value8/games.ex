@@ -4,13 +4,15 @@ defmodule Value8.Games do
   alias Value8.Games.Result
   alias Value8.Repo
 
+  # Category Methods
+
   alias Value8.Games.Category
 
   def list_categories do
     Repo.all(Category)
   end
 
-
+# Team Methods
 
   alias Value8.Games.Team
 
@@ -26,6 +28,7 @@ defmodule Value8.Games do
     |> Repo.insert()
   end
 
+  # Fixture Methods
 
 
   alias Value8.Games.Fixture
@@ -59,7 +62,6 @@ end
   def delete_fixture(%Fixture{} = fixture) do
     Repo.delete(fixture)
   end
-
 
 
   alias Value8.Games.Result
