@@ -1,5 +1,8 @@
 defmodule Value8Web.AdminHomeLive do
+  alias Value8.Bets
   alias Value8.Games
+  alias Value8.Games.Fixture
+
   alias Value8.Repo
   alias Value8.Accounts
   use Value8Web, :live_view
@@ -92,6 +95,66 @@ def handle_event("revoke_superadmin", %{"admin_id" => admin_id}, socket) do
      |> assign(:selected_section, "users")
     |> put_flash(:info, "User is no longer a superadmin.")
   {:noreply, socket}
+end
+
+def handle_event("submit_form", %{"match_date" => match_date, "match_time" => match_time, "category_id" => category_id, "team1_id" => team1_id, "team1_odds" => team1_odds, "team2_id" => team2_id, "team2_odds" => team2_odds} = params, socket) do
+  # Process form data
+  # changeset_fixture = Fixture.changeset(%Fixture{}, %{
+  #   match_date: match_date,
+  #   match_time: match_time,
+  #   category_id: category_id,
+  #   team1_id: team1_id,
+  #   team2_id: team2_id
+  # })
+  fixture_attrs = %{
+    match_date: match_date,
+    match_time: match_time,
+    category_id: String.to_integer(category_id),
+    team1_id: String.to_integer(team1_id),
+    team2_id: String.to_integer(team2_id)
+  }
+
+  # odds_attr =  %{
+  #   team1_odds: Decimal.cast(team1_odds),
+  #   team2_odds: Decimal.cast(team2_odds)
+  # }
+
+  # case Games.create_fixture(fixture_attrs) do
+  #   {:ok, fixture} ->
+  #     {:noreply, socket, put_flash(socket, :info, "Fixture and odds created successfully!"),
+  #      assigns: %{fixture: fixture}}
+  #   {:error, %Ecto.Changeset{} = changeset_fixture, changeset_odds} ->
+  #     {:noreply, socket, assigns: %{changeset_fixture: changeset_fixture, changeset_odds: changeset_odds}}
+  #   {:error, reason} ->
+  #     {:noreply, socket, put_flash(socket, :error, "Error creating fixture and odds: #{reason}")}
+  # end
+  case Games.create_fixture(fixture_attrs) do
+  {:ok, fixture} ->
+      odds_attr =  %{
+    team1_odds: Decimal.cast(team1_odds),
+    team2_odds: Decimal.cast(team2_odds),
+    fixture_id: fixture.id
+  }
+
+    case Bets.create_odds( odds_attr) do
+      {:ok, _odds} ->
+        socket =
+    socket
+    |> put_flash(:info, "Fixture and Odds Created succesfully.")
+        {:noreply, socket}
+      {:error, _reason} ->
+        socket =
+    socket
+    |> put_flash(:error, "Error creating odds.")
+
+        {:noreply, socket}
+    end
+  {:error, _reason} ->
+    socket =
+    socket
+    |> put_flash(:error, "Error creating fixture.")
+    {:noreply, socket}
+end
 end
 
 end

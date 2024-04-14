@@ -19,7 +19,7 @@ defmodule Value8.Games.Fixture do
   @doc false
   def changeset(fixture, attrs) do
     fixture
-    |> cast(attrs, [:match_date, :match_time])
-    |> validate_required([:match_date, :match_time])
+    |> cast(attrs, [:match_date, :match_time, :category_id, :team1_id, :team2_id])
+    |> validate_required([:match_date, :match_time, :category_id, :team1_id, :team2_id])
   end
 end

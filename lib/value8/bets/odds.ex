@@ -16,7 +16,7 @@ defmodule Value8.Bets.Odds do
   @doc false
   def changeset(odds, attrs) do
     odds
-    |> cast(attrs, [:team1_odds, :team2_odds, :draw_odds])
-    |> validate_required([:team1_odds, :team2_odds, :draw_odds])
+    |> cast(attrs, [:team1_odds, :team2_odds, :fixture_id])
+    |> validate_required([:team1_odds, :team2_odds, :fixture_id])
   end
 end
