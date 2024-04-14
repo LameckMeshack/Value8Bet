@@ -2,20 +2,31 @@ defmodule Value8Web.ViewUser do
   alias Value8.Accounts
   use Phoenix.LiveComponent
 
+  @impl Phoenix.LiveView
+  def mount(_params, _session, socket) do
+    # current_user_id = socket.assigns.current_user.id
+    {:noreply, socket}
+  end
+
+
   def render(assigns) do
     user = assigns[:selected_user]
+    current_user_id = assigns[:current_user_id]
+     is_current_user = user.id == current_user_id
+
     is_admin = user.admin != nil
     is_superadmin2 = is_admin && Enum.any?(user.admin.permissions, fn p -> p.name == "superadmin" end)
-
-
-
     is_superadmin = assigns[:is_superadmin]
 
   #  check if current user in superadmin
    ~H"""
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+
       <div class="px-4 py-5 sm:px-6">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">User Details  </h3>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">User Details
+        <%= inspect(is_current_user) %>
+
+        </h3>
       </div>
       <div class="border-t border-gray-200">
         <dl>
@@ -39,7 +50,7 @@ defmodule Value8Web.ViewUser do
 
            <!-- Action buttons -->
 
-      <%= if is_superadmin do %>
+      <%= if is_superadmin && !is_current_user do %>
         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
           <!-- Button to delete user -->
           <button

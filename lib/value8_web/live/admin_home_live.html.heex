@@ -197,12 +197,12 @@
     </div>
     <%= if @selected_section == "users" do %>
     <div>
-    <.live_component module={Value8Web.UserComponent} id={"table"} users={@users} is_superadmin={@is_superadmin} />
+    <.live_component module={Value8Web.UserComponent} id={"table"} users={@users} is_superadmin={@is_superadmin} current_user_id={@current_user.id} />
     </div>
     <% end %>
      <%= if @selected_section == "view_user" do %>
      <div>
-       <.live_component module={Value8Web.ViewUser} id={"user"} selected_user={@selected_user} is_superadmin={@is_superadmin} />
+       <.live_component module={Value8Web.ViewUser} id={"user"} selected_user={@selected_user} is_superadmin={@is_superadmin} current_user_id={@current_user.id}  />
      </div>
 <% end %>
 
@@ -223,9 +223,9 @@
 <% end %>
      <%= if @selected_section == "matches" do %>
      <div>
-      <p>Matches</p>
+      <p>Matches </p>
  
-<.live_component module={Value8Web.NewFixtureLive} id="fixture_form" />
+<.live_component module={Value8Web.NewFixtureLive} id="fixture_form"  current_user_id={@current_user.id}  />
 
      </div>
 <% end %>

@@ -58,6 +58,7 @@ def render(assigns) do
                             User
                            <% end %>
 
+
                           </span>
                         </td>
                         <td class="p-3 pr-0 text-start">
@@ -84,7 +85,7 @@ def render(assigns) do
 </svg>
 
                          </button>
-                            <%= if !user.admin || @is_superadmin  do %>
+                            <%= if !user.admin || @is_superadmin && (user.id != @current_user_id ) do %>
 
                           <button
                            phx-click="delete_user"
