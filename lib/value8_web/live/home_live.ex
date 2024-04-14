@@ -15,4 +15,5 @@ defmodule Value8Web.HomeLive do
     {:noreply, push_redirect(socket, to: "/fixture/#{id}")}
   end
 
+
 end

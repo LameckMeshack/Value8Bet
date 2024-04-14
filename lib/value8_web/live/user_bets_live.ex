@@ -37,6 +37,13 @@ def render(assigns) do
                 <span class="font-bold">Teams:</span>
                 <%= bet.fixture.team1.name %> vs <%= bet.fixture.team2.name %>
               </p>
+              <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+              phx-click="view_bet"
+    phx-value-id={bet.id}>
+                <span class="font-bold">Bet Action</span>
+
+              </button>
             </div>
             <div class="flex flex-col text-right">
               <h2 class="text-xl font-bold mb-2">Your Bet</h2>
@@ -62,4 +69,8 @@ def render(assigns) do
     </div>
   """
 end
+
+   def handle_event("view_bet", %{"id" => id}, socket) do
+    {:noreply, push_redirect(socket, to: "/bet/#{id}")}
+  end
 end

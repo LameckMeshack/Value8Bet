@@ -130,7 +130,8 @@ team2_odds_decimal = Decimal.new(team2_odds)
         socket =
     socket
     |> put_flash(:info, "Fixture and Odds Created succesfully.")
-    |> assign(:selected_section, "matches")
+    |> assign(:selected_section, "users")
+    # |>redirect(to: Routes.live_path(socket, AdminHomeLive))
         {:noreply, socket}
       {:error, reason} ->
         socket =
