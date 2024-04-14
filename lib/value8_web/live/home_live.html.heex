@@ -172,7 +172,7 @@
   </div>
   <div class="w-3/12 p-4">
     <h2 class="text-xl">Results</h2>
-    <%= for fixture <- @fixtures do %>
+    <%= for result <- @results do %>
 
     <div
       class="max-w-lg mx-auto bg-white rounded-lg mb-1   border-b shadow-md overflow-hidden" 
@@ -181,20 +181,20 @@
         <div class="flex items-center justify-between mb-4">
           <div>
             <div class="text-normal font-semibold">
-              <%= fixture.match_date %>
+              <%= result.fixture.match_date %>
             </div>
           </div>
           <div>
             <div class="text-normal font-semibold">
-              <%= fixture.team1.name %>
+              <%= result.fixture.team1.name %>
             </div>
-            <div>Goals: <%= fixture.result.team1_score %></div>
+            <div>Goals: <%= result.team1_score %></div>
           </div>
           <div>
             <div class="text-normal font-semibold">
-              <%= fixture.team2.name %>
+              <%= result.fixture.team2.name %>
             </div>
-            <div>Goals: <%= fixture.result.team2_score %></div>
+            <div>Goals: <%= result.team2_score %></div>
           </div>
         </div>
       </div>

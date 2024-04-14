@@ -7,7 +7,8 @@ defmodule Value8Web.HomeLive do
  def mount(_params, _session, socket) do
   categories = Games.list_categories()
     fixtures = Games.list_fixtures()
-    {:ok, assign(socket, categories: categories, fixtures: fixtures)}
+    results = Games.list_results()
+    {:ok, assign(socket, categories: categories, fixtures: fixtures, results: results)}
  end
 
    def handle_event("bet_now", %{"id" => id}, socket) do

@@ -1,6 +1,7 @@
 defmodule Value8.Games do
 
   import Ecto.Query, warn: false
+  alias Value8.Games.Result
   alias Value8.Repo
 
   alias Value8.Games.Category
@@ -35,6 +36,10 @@ defmodule Value8.Games do
     |> Repo.preload([:team1, :team2, :odds, :result])
   end
 
+  def list_results do
+    Repo.all(Result)
+    |> Repo.preload(fixture: [:team1, :team2])
+  end
 
  def get_fixture!(id) do
   fixture = Repo.get!(Fixture, id)
