@@ -55,9 +55,9 @@ def handle_event("place_bet", %{"bet_option" => bet_option, "amount" => amount},
  }
 
  # Create a new bet changeset
- changeset = Value8.Bets.Bet.changeset(%Value8.Bets.Bet{}, bet_attrs)
+#  changeset = Value8.Bets.Bet.changeset(%Value8.Bets.Bet{}, bet_attrs)
 
-  IO.puts("Bet changeset: #{inspect(bet_attrs)}")
+  # IO.puts("Bet changeset: #{inspect(bet_attrs)}")
 
   changeset = Value8.Bets.Bet.changeset(%Value8.Bets.Bet{}, bet_attrs)
 
