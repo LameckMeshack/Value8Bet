@@ -31,6 +31,16 @@ defmodule Value8.Bets.BetPlacedNotifier do
     """)
   end
 
+  def bet_won(user_email, url, payout) do
+    info(user_email, "Congratulations! You Won Your Bet", """
+    ==============================
+    Hi #{user_email},
+
+    Congratulations! You have won your bet. Your payout is #{payout}. You can view your bet details by visiting the URL below:
+    localhost:4000#{url}
 
 
+    ==============================
+    """)
+  end
 end
