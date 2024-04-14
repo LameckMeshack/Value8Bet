@@ -10,9 +10,6 @@ defmodule Value8.Games.Team do
     has_many :home_fixtures, Value8.Games.Fixture, foreign_key: :team1_id
     has_many :away_fixtures, Value8.Games.Fixture, foreign_key: :team2_id
     has_many :selected_team, Value8.Bets.Bet, foreign_key: :selected_team_id
-
-
-
     timestamps(type: :utc_datetime)
   end
 

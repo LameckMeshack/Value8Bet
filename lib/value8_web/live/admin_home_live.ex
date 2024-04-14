@@ -98,14 +98,7 @@ def handle_event("revoke_superadmin", %{"admin_id" => admin_id}, socket) do
 end
 
 def handle_event("submit_form", %{"match_date" => match_date, "match_time" => match_time, "category_id" => category_id, "team1_id" => team1_id, "team1_odds" => team1_odds, "team2_id" => team2_id, "team2_odds" => team2_odds} = params, socket) do
-  # Process form data
-  # changeset_fixture = Fixture.changeset(%Fixture{}, %{
-  #   match_date: match_date,
-  #   match_time: match_time,
-  #   category_id: category_id,
-  #   team1_id: team1_id,
-  #   team2_id: team2_id
-  # })
+
   fixture_attrs = %{
     match_date: match_date,
     match_time: match_time,

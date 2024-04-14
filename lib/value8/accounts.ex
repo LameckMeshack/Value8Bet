@@ -448,15 +448,6 @@ end
 
   alias Value8.Accounts.Permission
 
-  @doc """
-  Returns the list of permissions.
-
-  ## Examples
-
-      iex> list_permissions()
-      [%Permission{}, ...]
-
-  """
 
 
   def create_permission(attrs \\ %{}) do
