@@ -69,8 +69,6 @@ end
 
 def handle_event("make_superadmin", %{"admin_id" => admin_id}, socket) do
   admin_id = String.to_integer(admin_id)
-  # Accounts.make_superadmin(admin_id)
-  # Accounts.create_permission(admin_id, "superadmin")
     Accounts.create_permission(%{name: "superadmin", admin_id: admin_id})
   users = Accounts.list_users()
   socket =
@@ -78,6 +76,18 @@ def handle_event("make_superadmin", %{"admin_id" => admin_id}, socket) do
     |> assign(:users, users)
      |> assign(:selected_section, "users")
     |> put_flash(:info, "User is now a superadmin.")
+  {:noreply, socket}
+end
+
+def handle_event("revoke_superadmin", %{"admin_id" => admin_id}, socket) do
+  admin_id = String.to_integer(admin_id)
+  Accounts.delete_permission(admin_id)
+  users = Accounts.list_users()
+  socket =
+    socket
+    |> assign(:users, users)
+     |> assign(:selected_section, "users")
+    |> put_flash(:info, "User is no longer a superadmin.")
   {:noreply, socket}
 end
 

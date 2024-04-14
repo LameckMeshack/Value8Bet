@@ -441,101 +441,10 @@ end
     end
   end
 
-  alias Value8.Accounts.Admin
 
-  @doc """
-  Returns the list of admins.
 
-  ## Examples
 
-      iex> list_admins()
-      [%Admin{}, ...]
 
-  """
-  def list_admins do
-    Repo.all(Admin)
-  end
-
-  @doc """
-  Gets a single admin.
-
-  Raises `Ecto.NoResultsError` if the Admin does not exist.
-
-  ## Examples
-
-      iex> get_admin!(123)
-      %Admin{}
-
-      iex> get_admin!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_admin!(id), do: Repo.get!(Admin, id)
-
-  @doc """
-  Creates a admin.
-
-  ## Examples
-
-      iex> create_admin(%{field: value})
-      {:ok, %Admin{}}
-
-      iex> create_admin(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_admin(attrs \\ %{}) do
-    %Admin{}
-    |> Admin.changeset(attrs)
-    |> Repo.insert()
-  end
-
-  @doc """
-  Updates a admin.
-
-  ## Examples
-
-      iex> update_admin(admin, %{field: new_value})
-      {:ok, %Admin{}}
-
-      iex> update_admin(admin, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_admin(%Admin{} = admin, attrs) do
-    admin
-    |> Admin.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a admin.
-
-  ## Examples
-
-      iex> delete_admin(admin)
-      {:ok, %Admin{}}
-
-      iex> delete_admin(admin)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_admin(%Admin{} = admin) do
-    Repo.delete(admin)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking admin changes.
-
-  ## Examples
-
-      iex> change_admin(admin)
-      %Ecto.Changeset{data: %Admin{}}
-
-  """
-  def change_admin(%Admin{} = admin, attrs \\ %{}) do
-    Admin.changeset(admin, attrs)
-  end
 
   alias Value8.Accounts.Permission
 
@@ -548,88 +457,20 @@ end
       [%Permission{}, ...]
 
   """
-  def list_permissions do
-    Repo.all(Permission)
-  end
 
-  @doc """
-  Gets a single permission.
 
-  Raises `Ecto.NoResultsError` if the Permission does not exist.
-
-  ## Examples
-
-      iex> get_permission!(123)
-      %Permission{}
-
-      iex> get_permission!(456)
-      ** (Ecto.NoResultsError)
-
-  """
-  def get_permission!(id), do: Repo.get!(Permission, id)
-
-  @doc """
-  Creates a permission.
-
-  ## Examples
-
-      iex> create_permission(%{field: value})
-      {:ok, %Permission{}}
-
-      iex> create_permission(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
   def create_permission(attrs \\ %{}) do
     %Permission{}
     |> Permission.changeset(attrs)
     |> Repo.insert()
   end
 
-  @doc """
-  Updates a permission.
 
-  ## Examples
 
-      iex> update_permission(permission, %{field: new_value})
-      {:ok, %Permission{}}
-
-      iex> update_permission(permission, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_permission(%Permission{} = permission, attrs) do
-    permission
-    |> Permission.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a permission.
-
-  ## Examples
-
-      iex> delete_permission(permission)
-      {:ok, %Permission{}}
-
-      iex> delete_permission(permission)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_permission(%Permission{} = permission) do
-    Repo.delete(permission)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking permission changes.
-
-  ## Examples
-
-      iex> change_permission(permission)
-      %Ecto.Changeset{data: %Permission{}}
-
-  """
-  def change_permission(%Permission{} = permission, attrs \\ %{}) do
-    Permission.changeset(permission, attrs)
+  def delete_permission(admin_id) do
+   Permission
+  # |> Repo.get_by(admin_id: admin_id)
+   |> Ecto.Query.where(admin_id: ^admin_id)
+  |> Repo.delete_all()
   end
 end

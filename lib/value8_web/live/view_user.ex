@@ -15,7 +15,7 @@ defmodule Value8Web.ViewUser do
    ~H"""
     <div class="bg-white shadow overflow-hidden sm:rounded-lg">
       <div class="px-4 py-5 sm:px-6">
-        <h3 class="text-lg font-medium leading-6 text-gray-900">User Details </h3>
+        <h3 class="text-lg font-medium leading-6 text-gray-900">User Details  </h3>
       </div>
       <div class="border-t border-gray-200">
         <dl>
@@ -73,7 +73,8 @@ defmodule Value8Web.ViewUser do
             <!-- Action buttons -->
       <%= if is_admin && is_superadmin do %>
         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-          <!-- Button to toggle admin status -->
+          <!-- Button to toggle superadmin status -->
+            <%= if !is_superadmin2 do %>
           <button
 
           phx-click="make_superadmin"
@@ -83,6 +84,17 @@ defmodule Value8Web.ViewUser do
           class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             Grant Superadmin
           </button>
+          <% else %>
+          <button
+
+          phx-click="revoke_superadmin"
+            phx-value-admin_id={user.admin.id}
+
+
+          class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            Remove Superadmin
+          </button>
+           <% end %>
         </div>
       <% end %>
         </div>
