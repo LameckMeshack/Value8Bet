@@ -99,26 +99,7 @@ def mount(_params, _session, socket) do
     {:ok, socket}
   end
 
-def handle_event("submit_form", %{"match_date" => match_date, "match_time" => match_time, "category_id" => category_id, "team1_id" => team1_id, "team1_odds" => team1_odds, "team2_id" => team2_id, "team2_odds" => team2_odds}, socket) do
 
-  fixture_attrs = %{
-    match_date: match_date,
-    match_time: match_time,
-    category_id: String.to_integer(category_id),
-    team1_id: String.to_integer(team1_id),
-    team2_id: String.to_integer(team2_id)
-  }
-  Games.create_fixture(fixture_attrs)
-
-  odds_attrs = %{
-    team1_odds: String.to_float(team1_odds),
-    team2_odds: String.to_float(team2_odds),
-    # draw_odds: String.to_float(draw_odds)
-  }
-  Bets.create_odds(odds_attrs)
-
-    {:noreply, socket}
-  end
 
 
 

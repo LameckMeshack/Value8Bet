@@ -114,25 +114,14 @@ def handle_event("submit_form", %{"match_date" => match_date, "match_time" => ma
     team2_id: String.to_integer(team2_id)
   }
 
-  # odds_attr =  %{
-  #   team1_odds: Decimal.cast(team1_odds),
-  #   team2_odds: Decimal.cast(team2_odds)
-  # }
+ team1_odds_decimal = Decimal.new(team1_odds)
+team2_odds_decimal = Decimal.new(team2_odds)
 
-  # case Games.create_fixture(fixture_attrs) do
-  #   {:ok, fixture} ->
-  #     {:noreply, socket, put_flash(socket, :info, "Fixture and odds created successfully!"),
-  #      assigns: %{fixture: fixture}}
-  #   {:error, %Ecto.Changeset{} = changeset_fixture, changeset_odds} ->
-  #     {:noreply, socket, assigns: %{changeset_fixture: changeset_fixture, changeset_odds: changeset_odds}}
-  #   {:error, reason} ->
-  #     {:noreply, socket, put_flash(socket, :error, "Error creating fixture and odds: #{reason}")}
-  # end
   case Games.create_fixture(fixture_attrs) do
   {:ok, fixture} ->
       odds_attr =  %{
-    team1_odds: Decimal.cast(team1_odds),
-    team2_odds: Decimal.cast(team2_odds),
+    team1_odds: team1_odds_decimal,
+    team2_odds: team2_odds_decimal,
     fixture_id: fixture.id
   }
 
@@ -141,18 +130,21 @@ def handle_event("submit_form", %{"match_date" => match_date, "match_time" => ma
         socket =
     socket
     |> put_flash(:info, "Fixture and Odds Created succesfully.")
+    |> assign(:selected_section, "matches")
         {:noreply, socket}
-      {:error, _reason} ->
+      {:error, reason} ->
         socket =
     socket
     |> put_flash(:error, "Error creating odds.")
-
+      IO.puts("Error creating odds: #{inspect(reason)}")
         {:noreply, socket}
     end
-  {:error, _reason} ->
+  {:error, reason} ->
     socket =
     socket
     |> put_flash(:error, "Error creating fixture.")
+      IO.puts("Error creating fixture: #{inspect(reason)}")
+
     {:noreply, socket}
 end
 end
