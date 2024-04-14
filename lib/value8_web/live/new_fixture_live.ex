@@ -1,19 +1,123 @@
 defmodule Value8Web.NewFixtureLive do
  use Phoenix.LiveComponent
 
-   use Value8Web, :live_view
+alias Value8.Games
+use Value8Web, :live_view
+  def render(assigns) do
+    ~H"""
+    <div class="w-1/2">
+    <h1 class="text-2xl font-semibold mb-4">New Fixture</h1>
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <form phx-submit="submit_form">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="match_date">Match Date</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               id="match_date"
+               name="match_date"
+               type="date"
+               required>
+      </div>
 
-  alias Value8.Games.Team
-  alias Value8.Bets.Odds
- @impl Phoenix.LiveView
- def render(assigns) do
-   ~H"""
-   <div>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="match_time">Match Time</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               id="match_time"
+               name="match_time"
+               type="time"
+               required>
+      </div>
 
-   <h1>New Fixture</h1>
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="category">Category</label>
+        <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="category"
+                name="category_id"
+                required>
+          <%= for category <- @categories do %>
 
-   </div>
-   """
- end
+            <option value={category.id} ><%= category.name %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="team1">Team 1</label>
+        <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="team1"
+                name="team1_id"
+                required>
+          <%= for team <- @teams do %>
+            <option value={team.id} ><%= team.name %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="team2">Team 2</label>
+        <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="team2"
+                name="team2_id"
+                required>
+          <%= for team <- @teams do %>
+            <option value={team.id} ><%= team.name %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="team1_odds">Team 1 Odds</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               id="team1_odds"
+               name="team1_odds"
+               type="number"
+               step="0.01"
+               required>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="team2_odds">Team 2 Odds</label>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+               id="team2_odds"
+               name="team2_odds"
+               type="number"
+               step="0.01"
+               required>
+               </div>
+               <div class="mb-4 bg-blue-700 rounded">
+                 <button class="w-full p-4 " type="submit">Create Fixture</button>
+                </div>
+    </form>
+    </div>
+    </div>
+    """
+  end
+
+def mount(_params, _session, socket) do
+
+    {:ok, socket}
+  end
+
+  def handle_event("submit_form", %{"match_date" => match_date, "match_time" => match_time, "category_id" => category_id, "team1_id" => team1_id, "team2_id" => team2_id, "team1_odds" => team1_odds, "team2_odds" => team2_odds, "draw_odds" => draw_odds}, socket) do
+    fixture_attrs = %{
+      match_date: match_date,
+      match_time: match_time,
+      category_id: String.to_integer(category_id),
+      team1_id: String.to_integer(team1_id),
+      team2_id: String.to_integer(team2_id)
+    }
+
+    odds_attrs = %{
+      team1_odds: String.to_float(team1_odds),
+      team2_odds: String.to_float(team2_odds),
+      draw_odds: String.to_float(draw_odds)
+    }
+
+    # Here, you can call functions to create the fixture and odds records using Ecto
+
+    {:noreply, socket}
+  end
+
+
+
 
 end

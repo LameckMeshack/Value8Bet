@@ -1,4 +1,5 @@
 defmodule Value8Web.AdminHomeLive do
+  alias Value8.Games
   alias Value8.Repo
   alias Value8.Accounts
   use Value8Web, :live_view
@@ -7,11 +8,13 @@ defmodule Value8Web.AdminHomeLive do
 
   def mount(_params, _session, socket) do
  users = Accounts.list_users()
+
+ categories = Games.list_categories()
+ teams = Games.list_teams()
  id= socket.assigns.current_user.id
  current_user = Accounts.get_user!(id) |> Repo.preload([admin: :permissions])
-#  check if current user has a permission whose name is superadmin
    is_superadmin = Enum.any?(current_user.admin.permissions, fn permission -> permission.name == "superadmin" end)
- {:ok, assign(socket, content: :settings, selected_section: "dashboard", users: users, user_id: nil, is_superadmin: is_superadmin)}
+ {:ok, assign(socket, content: :settings, selected_section: "dashboard", users: users, user_id: nil, is_superadmin: is_superadmin, categories: categories, teams: teams)}
 end
 
   def handle_event("sidebar_clicked", %{"section" => section}, socket) do
