@@ -7,9 +7,12 @@ defmodule Value8.Application do
 
   @impl true
   def start(_type, _args) do
+     Oban.Telemetry.attach_default_logger(encode: false, level: :debug)
     children = [
       Value8Web.Telemetry,
       Value8.Repo,
+       {Oban, Application.fetch_env!(:Value8, Oban)},
+
       {DNSCluster, query: Application.get_env(:value8, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Value8.PubSub},
       # Start the Finch HTTP client for sending emails

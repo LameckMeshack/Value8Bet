@@ -46,7 +46,7 @@ defmodule Value8Web.TeamLive do
           required
         />
       </div>
-  
+
 
 
          <div class="flex bg-blue-800 items-center justify-between">

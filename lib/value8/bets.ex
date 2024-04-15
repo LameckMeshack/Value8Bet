@@ -3,7 +3,7 @@ defmodule Value8.Bets do
 
   import Ecto.Query, warn: false
   alias Value8.Repo
-
+  use Ecto.Schema
 
   # Odds Methods
 
@@ -20,6 +20,17 @@ defmodule Value8.Bets do
   alias Value8.Bets.Bet
 
 
+def random_unwon_bet do
+    from(b in Bet,
+      where: b.status != :won,
+      order_by: fragment("RANDOM()"),
+      limit: 1
+    )
+    |> Repo.one()
+    |> Repo.preload(:user)
+ end
+
+
 def get_bet!(id) do
   bet = Repo.get!(Bet, id)
   bet = Repo.preload(bet, [:fixture, :selected_team, fixture: [:team1, :team2]])
@@ -27,6 +38,7 @@ def get_bet!(id) do
 end
 
 # list user bets
+@spec list_user_bets(any()) :: nil | [%{optional(atom()) => any()}] | %{optional(atom()) => any()}
 def list_user_bets(user_id) do
   Bet
   |> where(user_id: ^user_id)

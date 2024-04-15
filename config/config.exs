@@ -11,6 +11,20 @@ config :value8,
   ecto_repos: [Value8.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+
+# Oban Configs
+config :Value8, Oban,
+  engine: Oban.Engines.Basic,
+  queues: [default: 10],
+  repo: Value8.Repo,
+ plugins: [
+    {Oban.Plugins.Cron, crontab: [
+      {"*/3 * * * *", Value8.Bets.UpdateBetStatusWorker}
+    ]}
+ ]
+
+
+
 # Configures the endpoint
 config :value8, Value8Web.Endpoint,
   url: [host: "localhost"],
